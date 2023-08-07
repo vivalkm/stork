@@ -1,5 +1,25 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import Offers from "./pages/Offers";
+import Profile from "./pages/Profile";
+import ForgotPassword from "./pages/ForgotPassword";
+
 function App() {
-    return <h1 className="text ">abc</h1>;
+    return (
+        <Router>
+            {" "}
+            <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/signup" element={<SignUp />}></Route>
+                <Route path="/signin" element={<SignIn />}></Route>
+                <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+                <Route path="/offers" element={<Offers />}></Route>
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
