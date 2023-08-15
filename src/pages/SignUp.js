@@ -69,7 +69,7 @@ export default function SignUp() {
         }
     };
 
-    const handleGoogleSignIn = async  () => {
+    const handleGoogleSignIn = async () => {
         if (await signInWithGoogle()) {
             navigate("/");
         }
@@ -79,7 +79,7 @@ export default function SignUp() {
         <div>
             <MainTitle>Sign Up</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
-                <div className="w-full md:w-[50%] lg:w-[40%]">
+                <div className="w-full md:w-[67%] lg:w-[50%]">
                     <form onSubmit={handleSignUp}>
                         <input
                             className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
@@ -119,7 +119,7 @@ export default function SignUp() {
                                 />
                             )}
                         </div>
-                        <div className="mb-6 text-sm sm:flex sm:justify-between sm:text-lg">
+                        <div className="mb-6 text-sm whitespace-nowrap sm:flex sm:justify-between sm:text-lg">
                             <p>
                                 Have an account?{" "}
                                 <Link
