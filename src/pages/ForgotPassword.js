@@ -1,19 +1,34 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export default function ForgotPassword() {
     const [formData, setFormData] = useState({
         email: "",
     });
 
-    const { email, password } = formData;
+    const { email } = formData;
+    const navigate = useNavigate();
 
     const handleFormChange = (event) =>
         setFormData({
             ...formData,
             [event.target.id]: event.target.value,
         });
+
+    const handleFormSubmit = async (event) => {
+        try {
+            event.preventDefault();
+            const auth = getAuth();
+            await sendPasswordResetEmail(auth, email);
+            toast.success(`Password resent email sent to ${email}!`);
+            navigate("/signin");
+        } catch (error) {
+            toast.error(`Could not send password reset email to ${email}`);
+        }
+    };
 
     return (
         <div>
@@ -22,7 +37,7 @@ export default function ForgotPassword() {
             </div>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[67%] lg:w-[40%]">
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                         <input
                             className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
                             type="email"

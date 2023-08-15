@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 const firebaseConfig = {
     apiKey: "AIzaSyAjtFZ9et86T3E8KnS-QLJbR_Jq0sQrCvA",
     authDomain: "stork-69d6e.firebaseapp.com",
+    databaseURL: "https://stork-69d6e.firebaseio.com",
     projectId: "stork-69d6e",
     storageBucket: "stork-69d6e.appspot.com",
     messagingSenderId: "235218132633",
@@ -16,4 +17,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-export const db = getFirestore();
+export const db = getFirestore(app);

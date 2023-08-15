@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
 import { db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Split from "../components/Split";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { FirebaseError } from "firebase/app";
+import signInWithGoogle from "../util/signInWithGoogle";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -30,7 +32,7 @@ export default function SignUp() {
             [event.target.id]: event.target.value,
         });
 
-    const handleFormSubmit = async (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
 
         // ref: https://firebase.google.com/docs/auth/web/start#sign_up_new_users
@@ -41,23 +43,34 @@ export default function SignUp() {
 
             updateProfile(auth.currentUser, { displayName: name });
 
-            // get a copy of form data without password for storing user info in db
+            // write the form data without password into db
             const formDataNoPwd = { ...formData };
             delete formDataNoPwd.password;
             formDataNoPwd.timestamp = serverTimestamp();
             await setDoc(doc(db, "users", user.uid), formDataNoPwd);
-            toast.success("Sign up was successful!");
+            toast.success("Sign up successful!");
             navigate("/");
         } catch (error) {
+            console.log(error);
+            // check empty
             if (name.length === 0 || email.length === 0 || password.length === 0) {
                 let msgArr = [];
                 if (name.length === 0) msgArr.push("your name");
                 if (email.length === 0) msgArr.push("email");
                 if (password.length === 0) msgArr.push("password");
                 toast.error(`${msgArr.join(", ")} is needed.`);
+            } else if (error instanceof FirebaseError) {
+                // get error messages from server
+                toast.error(error.message);
             } else {
                 toast.error("Something went wrong. Please try again later.");
             }
+        }
+    };
+
+    const handleGoogleSignIn = async  () => {
+        if (await signInWithGoogle()) {
+            navigate("/");
         }
     };
 
@@ -68,7 +81,7 @@ export default function SignUp() {
             </div>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[67%] lg:w-[40%]">
-                    <form onSubmit={handleFormSubmit}>
+                    <form onSubmit={handleSignUp}>
                         <input
                             className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
                             type="name"
@@ -130,6 +143,7 @@ export default function SignUp() {
                         icon={
                             <FcGoogle className="inline-block text-2xl bg-white rounded-full mr-2" />
                         }
+                        onClick={handleGoogleSignIn}
                     >
                         Continue with Google
                     </Button>

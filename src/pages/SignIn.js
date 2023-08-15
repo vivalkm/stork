@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-
-import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Split from "../components/Split";
+import { toast } from "react-toastify";
+import { FirebaseError } from "firebase/app";
+
+import signInWithGoogle from "../util/signInWithGoogle";
 
 export default function SignIn() {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
@@ -25,6 +30,30 @@ export default function SignIn() {
             [event.target.id]: event.target.value,
         });
 
+    const handleSignIn = async (event) => {
+        event.preventDefault();
+        try {
+            const auth = getAuth();
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            if (userCredential.user) {
+                toast.success("Sign in successful!");
+                navigate("/");
+            }
+        } catch (error) {
+            if (error instanceof FirebaseError) {
+                toast.error(error.message);
+            } else {
+                toast.error("Sign in failed!");
+            }
+        }
+    };
+
+    const handleGoogleSignIn = async () => {
+        if (await signInWithGoogle()) {
+            navigate("/");
+        }
+    };
+
     return (
         <div>
             <div>
@@ -32,7 +61,7 @@ export default function SignIn() {
             </div>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[67%] lg:w-[40%]">
-                    <form>
+                    <form onSubmit={handleSignIn}>
                         <input
                             className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
                             type="email"
@@ -85,7 +114,15 @@ export default function SignIn() {
                         </Button>
                     </form>
                     <Split>OR</Split>
-                    <Button danger rounded uppercase icon={<FcGoogle className="inline-block text-2xl bg-white rounded-full mr-2" />}>
+                    <Button
+                        danger
+                        rounded
+                        uppercase
+                        icon={
+                            <FcGoogle className="inline-block text-2xl bg-white rounded-full mr-2" />
+                        }
+                        onClick={handleGoogleSignIn}
+                    >
                         Continue with Google
                     </Button>
                 </div>

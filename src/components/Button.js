@@ -2,7 +2,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import className from "classnames";
 
-export default function Button({ children, primary, secondary, danger, uppercase, rounded, icon }) {
+export default function Button({ children, primary, secondary, danger, uppercase, rounded, icon, onClick }) {
     const classes = twMerge(
         className(
             "w-full",
@@ -25,7 +25,7 @@ export default function Button({ children, primary, secondary, danger, uppercase
     );
     return (
         <div>
-            <button className={classes}>
+            <button className={classes} onClick={onClick}>
                 {icon}
                 {children}
             </button>
