@@ -7,8 +7,8 @@ import Button from "../components/Button";
 import Split from "../components/Split";
 import { toast } from "react-toastify";
 import { FirebaseError } from "firebase/app";
-
 import signInWithGoogle from "../util/signInWithGoogle";
+import MainTitle from "../components/MainTitle";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -56,11 +56,9 @@ export default function SignIn() {
 
     return (
         <div>
-            <div>
-                <h2 className="text-center font-bold text-3xl mt-6">Sign In</h2>
-            </div>
+            <MainTitle>Sign In</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
-                <div className="w-full md:w-[67%] lg:w-[40%]">
+                <div className="w-full md:w-[50%] lg:w-[40%]">
                     <form onSubmit={handleSignIn}>
                         <input
                             className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
