@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import MainTitle from "../components/MainTitle";
-import { getAuth, updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import { toast } from "react-toastify";
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function Profile() {
-    const [isReadOnly, setIsReadOnly] = useState(true);
+    const [isOnEdit, setIsOnEdit] = useState(false);
+    const { setLoggedIn } = useAuthContext();
 
     const [profileData, setProfileData] = useState({
         name: auth.currentUser.displayName,
@@ -18,7 +20,7 @@ export default function Profile() {
     const { name, email } = profileData;
     const navigate = useNavigate();
     const handleOnEdit = () => {
-        setIsReadOnly(false);
+        setIsOnEdit(true);
     };
 
     const handleOnChange = (event) => {
@@ -30,7 +32,8 @@ export default function Profile() {
 
     const handleSignOut = () => {
         auth.signOut();
-        setIsReadOnly(true);
+        setLoggedIn(false);
+        setIsOnEdit(false);
         navigate("/");
     };
 
@@ -38,7 +41,7 @@ export default function Profile() {
         event.preventDefault();
         try {
             updateProfile(auth.currentUser, { displayName: name });
-            setIsReadOnly(true);
+            setIsOnEdit(false);
             const docRef = doc(db, "users", auth.currentUser.uid);
             await updateDoc(docRef, { name });
             toast.success("Profile updated!");
@@ -52,7 +55,7 @@ export default function Profile() {
             name: auth.currentUser.displayName,
             email: auth.currentUser.email,
         });
-        setIsReadOnly(true);
+        setIsOnEdit(false);
     };
 
     return (
@@ -64,12 +67,12 @@ export default function Profile() {
                         <label htmlFor="name">Name</label>
                         <input
                             className={`w-full mb-6 px-4 py-2 text-xl text-gray-700 border-gray-300 rounded transition ease-in-out ${
-                                isReadOnly ? "bg-gray-200" : "bg-white"
+                                !isOnEdit ? "bg-gray-200" : "bg-white"
                             }`}
                             type="text"
                             id="name"
                             value={name}
-                            disabled={isReadOnly}
+                            disabled={!isOnEdit}
                             onChange={handleOnChange}
                         />
                         <label htmlFor="email">Email</label>
@@ -81,7 +84,7 @@ export default function Profile() {
                             value={email}
                             onChange={handleOnChange}
                         />
-                        <div hidden={isReadOnly}>
+                        <div hidden={!isOnEdit}>
                             <div className="flex justify-between mb-6">
                                 <Button onClick={handleFormSubmit} primary rounded>
                                     Save
@@ -99,7 +102,7 @@ export default function Profile() {
                         </div>
                         <div
                             className="mb-6 text-sm whitespace-nowrap sm:flex sm:justify-between sm:text-lg"
-                            hidden={!isReadOnly}
+                            hidden={isOnEdit}
                         >
                             <p>
                                 Need to change your name?

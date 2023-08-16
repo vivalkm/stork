@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useAuthStatus } from "../hooks/useAuthStatus";
-import { auth } from "../firebase";
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function Header() {
     const location = useLocation();
@@ -10,16 +8,7 @@ export default function Header() {
     function pathMatchRoute(route) {
         return location.pathname === route;
     }
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setIsLoggedIn(true);
-            } else {
-                setIsLoggedIn(false);
-            }
-        });
-    }, [auth]);
+    const { loggedIn } = useAuthContext();
 
     return (
         <div className="border-b bg-white shadow-sm sticky top-0">
@@ -60,9 +49,9 @@ export default function Header() {
                                     ? "text-black border-b-red-500"
                                     : "text-gray-400 border-b-transparent"
                             }`}
-                            onClick={() => navigate(isLoggedIn ? "/profile" : "/signin")}
+                            onClick={() => navigate(loggedIn ? "/profile" : "/signin")}
                         >
-                            {isLoggedIn ? "Profile" : "Sign In"}
+                            {loggedIn ? "Profile" : "Sign In"}
                         </li>
                     </ul>
                 </div>
