@@ -8,7 +8,15 @@ body {
 
 .header {
     background-color: #209CEE;
-    height: 50px;
+    height: 48px;
+}
+
+.border-dark-blue {
+    border-color: #ffb703;
+}
+
+.header-logo {
+    height: 40px;
 }
 
 .swiper {
