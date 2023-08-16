@@ -6,10 +6,10 @@ import Offers from "./pages/Offers";
 import Profile from "./pages/Profile";
 import ForgotPassword from "./pages/ForgotPassword";
 import Header from "./components/Header";
+import Listing from "./pages/Listing";
 import Toast from "./components/Toast";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRouteProfile from "./components/PrivateRouteProfile";
-import Listing from "./pages/Listing";
 import PrivateRouteSignUp from "./components/PrivateRouteSignUp";
 import PrivateRouteSignIn from "./components/PrivateRouteSignIn";
 
