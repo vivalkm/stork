@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
+import logo from "../assets/logo.png"
 
 export default function Header() {
     const location = useLocation();
@@ -15,8 +16,8 @@ export default function Header() {
             <header className="flex justify-between items-center">
                 <div>
                     <img
-                        className="h-5 cursor-pointer"
-                        src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg"
+                        className="cursor-pointer header"
+                        src={logo}
                         alt="logo"
                         onClick={() => navigate("/")}
                     />
