@@ -4,12 +4,11 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import { toast } from "react-toastify";
 
 export default function Profile() {
     const [isReadOnly, setIsReadOnly] = useState(true);
-    const auth = getAuth();
 
     const [profileData, setProfileData] = useState({
         name: auth.currentUser.displayName,
@@ -49,6 +48,10 @@ export default function Profile() {
     };
 
     const handleCancelEdit = () => {
+        setProfileData({
+            name: auth.currentUser.displayName,
+            email: auth.currentUser.email,
+        });
         setIsReadOnly(true);
     };
 
@@ -60,7 +63,7 @@ export default function Profile() {
                     <form onSubmit={handleFormSubmit}>
                         <label htmlFor="name">Name</label>
                         <input
-                            className={`w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out ${
+                            className={`w-full mb-6 px-4 py-2 text-xl text-gray-700 border-gray-300 rounded transition ease-in-out ${
                                 isReadOnly ? "bg-gray-200" : "bg-white"
                             }`}
                             type="text"
@@ -83,7 +86,13 @@ export default function Profile() {
                                 <Button onClick={handleFormSubmit} primary rounded>
                                     Save
                                 </Button>
-                                <Button onClick={handleCancelEdit} secondary outline rounded type="button">
+                                <Button
+                                    onClick={handleCancelEdit}
+                                    secondary
+                                    outline
+                                    rounded
+                                    type="button"
+                                >
                                     Cancel
                                 </Button>
                             </div>

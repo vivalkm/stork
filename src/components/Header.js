@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useAuthStatus } from "../hooks/useAuthStatus";
+import { auth } from "../firebase";
 
 export default function Header() {
     const location = useLocation();
@@ -9,7 +11,6 @@ export default function Header() {
         return location.pathname === route;
     }
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const auth = getAuth();
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -55,25 +56,13 @@ export default function Header() {
                         </li>
                         <li
                             className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${
-                                pathMatchRoute("/signin")
+                                pathMatchRoute("/signin") || pathMatchRoute("/profile")
                                     ? "text-black border-b-red-500"
                                     : "text-gray-400 border-b-transparent"
                             }`}
-                            onClick={() => navigate("/signin")}
-                            hidden={isLoggedIn}
+                            onClick={() => navigate(isLoggedIn ? "/profile" : "/signin")}
                         >
-                            Sign In
-                        </li>
-                        <li
-                            className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${
-                                pathMatchRoute("/signin")
-                                    ? "text-black border-b-red-500"
-                                    : "text-gray-400 border-b-transparent"
-                            }`}
-                            onClick={() => navigate("/profile")}
-                            hidden={!isLoggedIn}
-                        >
-                            Profile
+                            {isLoggedIn ? "Profile" : "Sign In"}
                         </li>
                     </ul>
                 </div>
