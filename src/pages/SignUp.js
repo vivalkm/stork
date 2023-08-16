@@ -82,24 +82,27 @@ export default function SignUp() {
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[67%] lg:w-[50%]">
                     <form onSubmit={handleSignUp}>
-                        <StandardInput
-                            rounded
-                            type="text"
-                            id="name"
-                            placeholder="Your Name"
-                            value={name}
-                            autoFocus
-                            onChange={handleFormChange}
-                        />
-
-                        <StandardInput
-                            rounded
-                            type="email"
-                            id="email"
-                            placeholder="Email Address"
-                            value={email}
-                            onChange={handleFormChange}
-                        />
+                        <div className="mb-6">
+                            <StandardInput
+                                rounded
+                                type="text"
+                                id="name"
+                                placeholder="Your Name"
+                                value={name}
+                                autoFocus
+                                onChange={handleFormChange}
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <StandardInput
+                                rounded
+                                type="email"
+                                id="email"
+                                placeholder="Email Address"
+                                value={email}
+                                onChange={handleFormChange}
+                            />
+                        </div>
                         <div className="relative mb-6">
                             <StandardInput
                                 rounded

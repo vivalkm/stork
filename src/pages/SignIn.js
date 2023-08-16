@@ -61,15 +61,17 @@ export default function SignIn() {
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[67%] lg:w-[50%]">
                     <form onSubmit={handleSignIn}>
-                        <StandardInput
-                            rounded
-                            type="email"
-                            id="email"
-                            placeholder="Email Address"
-                            value={email}
-                            autoFocus
-                            onChange={handleFormChange}
-                        />
+                        <div className="mb-6">
+                            <StandardInput
+                                rounded
+                                type="email"
+                                id="email"
+                                placeholder="Email Address"
+                                value={email}
+                                autoFocus
+                                onChange={handleFormChange}
+                            />
+                        </div>
                         <div className="relative mb-6">
                             <StandardInput
                                 rounded

@@ -38,15 +38,17 @@ export default function ForgotPassword() {
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[50%] lg:w-[40%]">
                     <form onSubmit={handleFormSubmit}>
-                        <StandardInput
-                            rounded
-                            type="email"
-                            id="email"
-                            placeholder="Email Address"
-                            value={email}
-                            autoFocus
-                            onChange={handleFormChange}
-                        />
+                        <div className="mb-6">
+                            <StandardInput
+                                rounded
+                                type="email"
+                                id="email"
+                                placeholder="Email Address"
+                                value={email}
+                                autoFocus
+                                onChange={handleFormChange}
+                            />
+                        </div>
                         <div className="mb-6 text-sm sm:flex sm:justify-between sm:text-lg">
                             <p>
                                 Don't have an account?{" "}
