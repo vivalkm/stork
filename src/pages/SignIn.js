@@ -95,9 +95,9 @@ export default function SignIn() {
                         </div>
                         <div className="mb-6 text-sm sm:flex sm:justify-between sm:text-lg">
                             <p>
-                                Don't have an account?{" "}
+                                <span className="mr-1">Don't have an account?</span>
                                 <Link
-                                    className="ml-1 text-red-500 hover:text-red-700 hover:font-bold transition duration-200 ease-in-out"
+                                    className="text-red-500 hover:text-red-700 hover:font-bold transition duration-200 ease-in-out"
                                     to="/signup"
                                 >
                                     Register

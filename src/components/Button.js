@@ -13,6 +13,7 @@ export default function Button({
     icon,
     onClick,
     type,
+    shadow
 }) {
     const classes = twMerge(
         className(
@@ -38,6 +39,7 @@ export default function Button({
                     outline && secondary,
                 "text-gray-700 bg-transparent border-red-600 hover:bg-red-100 hover:border-red-400 active:bg-red-400 active:text-white":
                     outline && danger,
+                "shadow-md": shadow,
                 uppercase: uppercase,
                 rounded: rounded,
             }

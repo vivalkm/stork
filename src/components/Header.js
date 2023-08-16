@@ -22,7 +22,7 @@ export default function Header() {
                         onClick={() => navigate("/")}
                     />
                 </div>
-                <div className="mr-2">
+                <div className="mr-2 whitespace-nowrap">
                     <ul className="flex space-x-10">
                         <li
                             className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${

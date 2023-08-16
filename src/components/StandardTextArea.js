@@ -2,9 +2,8 @@ import classNames from "classnames";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-export default function StandardInput({
+export default function StandardTextArea({
     rounded,
-    type,
     id,
     placeholder,
     value,
@@ -17,10 +16,11 @@ export default function StandardInput({
     textLarge,
     textMid,
     textSmall,
+    rows
 }) {
     const classes = twMerge(
         classNames(
-            "w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out",
+            "w-full px-4 py-2 text-gray-700 bg-white border-gray-300 rounded transition ease-in-out",
             {
                 rounded: rounded,
                 "bg-gray-200": disabled,
@@ -31,9 +31,8 @@ export default function StandardInput({
         )
     );
     return (
-        <input
+        <textarea
             className={classes}
-            type={type}
             id={id}
             placeholder={placeholder}
             value={value}
@@ -43,6 +42,7 @@ export default function StandardInput({
             maxLength={maxLength}
             minLength={minLength}
             required={required}
+            rows={rows}
         />
     );
 }
