@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PrivateRouteProfile from "./components/PrivateRouteProfile";
 import PrivateRouteSignUp from "./components/PrivateRouteSignUp";
 import PrivateRouteSignIn from "./components/PrivateRouteSignIn";
+import Sell from "./pages/Sell";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                     </Route>
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/offers" element={<Offers />} />
+                    <Route path="/sell" element={<Sell />} />
                     <Route path="/category/:categoryName/:listingId" element={<Listing />} />
                 </Routes>
             </Router>

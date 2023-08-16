@@ -45,6 +45,16 @@ export default function Header() {
                         </li>
                         <li
                             className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${
+                                pathMatchRoute("/sell")
+                                    ? "text-black border-b-red-500"
+                                    : "text-gray-400 border-b-transparent"
+                            }`}
+                            onClick={() => navigate("/sell")}
+                        >
+                            Sell
+                        </li>
+                        <li
+                            className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${
                                 pathMatchRoute("/signin") || pathMatchRoute("/profile")
                                     ? "text-black border-b-red-500"
                                     : "text-gray-400 border-b-transparent"

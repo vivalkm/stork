@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
 import MainTitle from "../components/MainTitle";
+import StandardInput from "../components/StandardInput";
 
 export default function ForgotPassword() {
     const [formData, setFormData] = useState({
@@ -37,8 +38,8 @@ export default function ForgotPassword() {
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[50%] lg:w-[40%]">
                     <form onSubmit={handleFormSubmit}>
-                        <input
-                            className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
+                        <StandardInput
+                            rounded
                             type="email"
                             id="email"
                             placeholder="Email Address"

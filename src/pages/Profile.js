@@ -7,6 +7,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import { toast } from "react-toastify";
 import useAuthContext from "../hooks/useAuthContext";
+import StandardInput from "../components/StandardInput";
 
 export default function Profile() {
     const [isOnEdit, setIsOnEdit] = useState(false);
@@ -65,10 +66,8 @@ export default function Profile() {
                 <div className="w-full md:w-[67%] lg:w-[50%]">
                     <form onSubmit={handleFormSubmit}>
                         <label htmlFor="name">Name</label>
-                        <input
-                            className={`w-full mb-6 px-4 py-2 text-xl text-gray-700 border-gray-300 rounded transition ease-in-out ${
-                                !isOnEdit ? "bg-gray-200" : "bg-white"
-                            }`}
+                        <StandardInput
+                            rounded
                             type="text"
                             id="name"
                             value={name}
@@ -76,8 +75,8 @@ export default function Profile() {
                             onChange={handleOnChange}
                         />
                         <label htmlFor="email">Email</label>
-                        <input
-                            className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-gray-200 border-gray-300 rounded transition ease-in-out"
+                        <StandardInput
+                            rounded
                             type="email"
                             id="email"
                             disabled
@@ -121,6 +120,9 @@ export default function Profile() {
                             </span>
                         </div>
                     </form>
+                    <Button primary rounded onClick={() => navigate("/sell")}>
+                        Have something to sell?
+                    </Button>
                 </div>
             </div>
         </div>

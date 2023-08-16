@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { FirebaseError } from "firebase/app";
 import signInWithGoogle from "../util/signInWithGoogle";
 import MainTitle from "../components/MainTitle";
+import StandardInput from "../components/StandardInput";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -60,8 +61,8 @@ export default function SignIn() {
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[67%] lg:w-[50%]">
                     <form onSubmit={handleSignIn}>
-                        <input
-                            className="w-full mb-6 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
+                        <StandardInput
+                            rounded
                             type="email"
                             id="email"
                             placeholder="Email Address"
@@ -70,8 +71,8 @@ export default function SignIn() {
                             onChange={handleFormChange}
                         />
                         <div className="relative mb-6">
-                            <input
-                                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
+                            <StandardInput
+                                rounded
                                 type={showPassword ? "text" : "password"}
                                 id="password"
                                 placeholder="Password"
