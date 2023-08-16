@@ -5,13 +5,9 @@ import Spinner from "./Spinner";
 
 export default function PrivateRouteSignIn() {
     const { loggedIn, checkingStatus } = useAuthContext();
-    
+
     if (checkingStatus) {
-        return (
-            <div className="flex justify-center">
-                <Spinner />
-            </div>
-        );
+        return <Spinner />;
     }
     return loggedIn ? <Navigate to="/profile" /> : <Outlet />;
 }
