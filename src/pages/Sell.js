@@ -4,8 +4,12 @@ import Button from "../components/Button";
 import StandardInput from "../components/StandardInput";
 import OptionButton from "../components/OptionButton";
 import StandardTextArea from "../components/StandardTextArea";
+import Spinner from "../components/Spinner";
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { toast } from "react-toastify";
 
 export default function Sell() {
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         category: null,
         name: "",
@@ -13,8 +17,9 @@ export default function Sell() {
         description: "",
         regPrice: 0,
         discountedPrice: 0,
+        images: {},
     });
-    const { name, address, description, regPrice, discountedPrice } = formData;
+    const { name, address, description, regPrice, discountedPrice, images } = formData;
     const handleOnClick = (event) => {
         setFormData({
             ...formData,
@@ -28,9 +33,37 @@ export default function Sell() {
         });
     };
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
+        if (images.length > 7) {
+            toast.error("Maximum 7 images are allowed.");
+            setLoading(false);
+            return;
+        } else {
+            [...images].map((image) => {
+                try {
+                    url = storeImage(image);
+                    return url;
+                } catch (error) {
+                    storeImage(false);
+                    toast.error("Images not uploaded.");
+                    return;
+                }
+            });
+        }
     };
+
+    // upload a given image to Firebase Cloud Storage
+    const storage = getStorage();
+    const storeImage = async (image) => {
+        const imgRef = ref(storage, image);
+        const uploadTask = uploadBytesResumable(imgRef, file);
+    };
+
+    if (loading) {
+        return <Spinner />;
+    }
 
     return (
         <div className="max-w-md px-2 mx-auto">
