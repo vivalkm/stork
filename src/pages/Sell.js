@@ -11,8 +11,10 @@ export default function Sell() {
         name: "",
         address: "",
         description: "",
+        regPrice: 0,
+        discountedPrice: 0,
     });
-    const { name, address, description } = formData;
+    const { name, address, description, regPrice, discountedPrice } = formData;
     const handleOnClick = (event) => {
         setFormData({
             ...formData,
@@ -22,13 +24,18 @@ export default function Sell() {
     const handleOnChange = (event) => {
         setFormData({
             ...formData,
-            [event.target.id]: event.target.value,
+            [event.target.id]: event.target.files ? event.target.files : event.target.value,
         });
     };
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <div className="max-w-md px-2 mx-auto">
             <MainTitle>Sell An Item</MainTitle>
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <label className="text-lg mt-6 font-semibold">Sell / Rent</label>
                 <div className="flex">
                     <div className="w-full mr-2">
@@ -68,6 +75,7 @@ export default function Sell() {
                         minLength="5"
                         textSmall
                         required
+                        rounded
                     />
                 </div>
                 <div className="mt-6">
@@ -81,6 +89,7 @@ export default function Sell() {
                         maxLength="100"
                         minLength="5"
                         textSmall
+                        rounded
                     />
                 </div>
                 <div className="mt-6">
@@ -93,10 +102,66 @@ export default function Sell() {
                         onChange={handleOnChange}
                         maxLength="1000"
                         textSmall
-                        rows="4"
+                        rows="3"
+                        rounded
                     >
                         Description
                     </StandardTextArea>
+                </div>
+                <div className="mt-6 flex">
+                    <div className="mr-2 w-full">
+                        <label htmlFor="regPrice" className="text-lg font-semibold">
+                            Regular Price
+                        </label>
+                        <StandardInput
+                            type="number"
+                            id="regPrice"
+                            value={regPrice}
+                            onChange={handleOnChange}
+                            textSmall
+                            min="0"
+                            required
+                            rounded
+                        />
+                    </div>
+                    <div className="ml-2 w-full">
+                        <label htmlFor="discountedPrice" className="text-lg font-semibold">
+                            Discounted Price
+                        </label>
+                        <StandardInput
+                            type="number"
+                            id="discountedPrice"
+                            value={discountedPrice}
+                            onChange={handleOnChange}
+                            textSmall
+                            min="0"
+                            max={regPrice}
+                            rounded
+                        />
+                    </div>
+                </div>
+                <div className="mt-6">
+                    <label htmlFor="images" className="text-lg font-semibold">
+                        Images
+                    </label>
+                    <StandardInput
+                        id="images"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleOnChange}
+                        maxLength="1000"
+                        textSmall
+                        rows="3"
+                        multiple
+                        required
+                        rounded
+                        border
+                    ></StandardInput>
+                </div>
+                <div className="mt-6">
+                    <Button primary uppercase rounded shadow>
+                        Create
+                    </Button>
                 </div>
             </form>
         </div>

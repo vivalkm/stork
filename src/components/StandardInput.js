@@ -17,16 +17,22 @@ export default function StandardInput({
     textLarge,
     textMid,
     textSmall,
+    min,
+    max,
+    accept,
+    multiple,
+    border,
 }) {
     const classes = twMerge(
         classNames(
-            "w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out",
+            "w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 transition ease-in-out",
             {
                 rounded: rounded,
                 "bg-gray-200": disabled,
                 "text-lg": textLarge,
                 "text-md": textMid,
                 "text-sm": textSmall,
+                border: border,
             }
         )
     );
@@ -43,6 +49,10 @@ export default function StandardInput({
             maxLength={maxLength}
             minLength={minLength}
             required={required}
+            min={min}
+            max={max}
+            accept={accept}
+            multiple={multiple}
         />
     );
 }

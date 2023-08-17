@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 import Spinner from "./Spinner";
 
-export default function PrivateRouteSignUp() {
+export default function PrivateRouteProfile({ needLoggedIn, pathIfFalse }) {
     const { loggedIn, checkingStatus } = useAuthContext();
 
     if (checkingStatus) {
         return <Spinner />;
     }
-    return loggedIn ? <Navigate to="/profile" /> : <Outlet />;
+    return loggedIn == needLoggedIn ? <Outlet /> : <Navigate to={pathIfFalse} />;
 }
