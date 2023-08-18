@@ -5,8 +5,12 @@ import StandardInput from "../components/StandardInput";
 import OptionButton from "../components/OptionButton";
 import StandardTextArea from "../components/StandardTextArea";
 import Spinner from "../components/Spinner";
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+import { auth, db } from "../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router";
 
 export default function Sell() {
     const [loading, setLoading] = useState(false);
@@ -19,7 +23,11 @@ export default function Sell() {
         discountedPrice: 0,
         images: {},
     });
+
     const { name, address, description, regPrice, discountedPrice, images } = formData;
+
+    const navigate = useNavigate();
+
     const handleOnClick = (event) => {
         setFormData({
             ...formData,
@@ -41,24 +49,69 @@ export default function Sell() {
             setLoading(false);
             return;
         } else {
-            [...images].map((image) => {
-                try {
-                    url = storeImage(image);
-                    return url;
-                } catch (error) {
-                    storeImage(false);
-                    toast.error("Images not uploaded.");
-                    return;
-                }
-            });
+            // get the array of urls for all images uploaded
+            const imgUrls = await Promise.all(
+                [...images].map((image) =>
+                    storeImage(image).catch((error) => {
+                        setLoading(false);
+                        toast.error("Images not uploaded.");
+                        return;
+                    })
+                )
+            );
+            const formDataCopy = { ...formData, imgUrls: imgUrls, timestamp: serverTimestamp() };
+            delete formDataCopy.images;
+
+            // upload list info to firestore
+            const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+
+            setLoading(false);
+            toast.success("Listing created");
+            navigate(`/listings/${formDataCopy.category}/${docRef.id}`);
         }
     };
 
-    // upload a given image to Firebase Cloud Storage
-    const storage = getStorage();
+    /**
+     * upload a given image file to Firebase Cloud Storage
+     * ref: https://firebase.google.com/docs/storage/web/upload-files
+     *
+     * @param {*} image is an image file
+     * @returns a Promise with the storage url of image if resolved, or an error if rejected
+     */
     const storeImage = async (image) => {
-        const imgRef = ref(storage, image);
-        const uploadTask = uploadBytesResumable(imgRef, file);
+        const storage = getStorage();
+        return new Promise((resolve, reject) => {
+            const filename = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+            const storageRef = ref(storage, filename);
+            const uploadTask = uploadBytesResumable(storageRef, image);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log("Upload is " + progress + "% done");
+                    switch (snapshot.state) {
+                        case "paused":
+                            console.log("Upload is paused");
+                            break;
+                        case "running":
+                            console.log("Upload is running");
+                            break;
+                    }
+                },
+                (error) => {
+                    reject(error);
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                    });
+                }
+            );
+        });
     };
 
     if (loading) {

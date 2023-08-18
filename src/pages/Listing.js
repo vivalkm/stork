@@ -36,7 +36,7 @@ export default function Listing() {
     if (loading) {
         return <div>Loading</div>;
     } else {
-        const renderedSlide = listing.imgUrl.map((url, index) => {
+        const renderedSlide = listing.imgUrls.map((url, index) => {
             return (
                 <SwiperSlide key={index}>
                     <div

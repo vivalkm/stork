@@ -53,7 +53,7 @@ function App() {
                     >
                         <Route path="/sell" element={<Sell />} />
                     </Route>
-                    <Route path="/category/:categoryName/:listingId" element={<Listing />} />
+                    <Route path="/listings/:categoryName/:listingId" element={<Listing />} />
                 </Routes>
             </Router>
             <Toast />
