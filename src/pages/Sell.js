@@ -49,10 +49,11 @@ export default function Sell() {
             setLoading(false);
             return;
         } else {
+            let imageNames = [];
             // get the array of urls for all images uploaded
             const imgUrls = await Promise.all(
                 [...images].map((image) =>
-                    storeImage(image).catch((error) => {
+                    storeImage(image, imageNames).catch((error) => {
                         setLoading(false);
                         toast.error("Images not uploaded.");
                         return;
@@ -62,6 +63,7 @@ export default function Sell() {
             const formDataCopy = {
                 ...formData,
                 imgUrls: imgUrls,
+                imageNames,
                 uid: auth.currentUser.uid,
                 timestamp: serverTimestamp(),
             };
@@ -83,7 +85,7 @@ export default function Sell() {
      * @param {*} image is an image file
      * @returns a Promise with the storage url of image if resolved, or an error if rejected
      */
-    const storeImage = async (image) => {
+    const storeImage = async (image, imageNames) => {
         const storage = getStorage();
         return new Promise((resolve, reject) => {
             const filename = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
@@ -114,6 +116,7 @@ export default function Sell() {
                     // Handle successful uploads on complete
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        imageNames.push(filename);
                         resolve(downloadURL);
                     });
                 }

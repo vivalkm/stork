@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { deleteObject, getStorage, ref } from "firebase/storage";
 
 const MyListingsContext = createContext();
 
@@ -31,12 +32,42 @@ function MyListingsContextProvider({ children }) {
         });
     }, [listings]);
 
-    const deleteListingById = (id) => {
-        return 0;
+    /**
+     *
+     * @param {*} id of a listing
+     * @returns true if delete is successful, otherwise return false
+     */
+    const deleteListingById = async (id) => {
+        const docRef = doc(db, "listings", id);
+        try {
+            await deleteDoc(docRef);
+            const updatedListings = listings.filter((listing) => listing.id !== id);
+            setListings(updatedListings);
+            return true;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    };
+
+    const deleteImageByName = async (imgName) => {
+        const storage = getStorage();
+
+        // Create a reference to the file to delete
+        const storageRef = ref(storage, imgName);
+
+        // Delete the file
+        await deleteObject(storageRef);
+    };
+
+    const deleteImages = (imgNames) => {
+        imgNames.forEach((imgName) => {
+            deleteImageByName(imgName);
+        });
     };
 
     return (
-        <MyListingsContext.Provider value={{ loading, listings, deleteListingById }}>
+        <MyListingsContext.Provider value={{ loading, listings, deleteListingById, deleteImages }}>
             {children}
         </MyListingsContext.Provider>
     );

@@ -5,8 +5,6 @@ import ListingCard from "./ListingCard";
 
 export default function MyListings() {
     const { loading, listings } = useMyListingsContext();
-    // const listings = [];
-    // const loading = false;
     const renderedListings = listings.map((listing, index) => {
         return <ListingCard key={index} listing={listing} />;
     });
