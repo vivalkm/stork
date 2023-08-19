@@ -4,7 +4,7 @@ import { auth } from "../firebase";
 
 const AuthContext = createContext();
 
-function Provider({ children }) {
+function AuthContextProvider({ children }) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [checkingStatus, setCheckingStatus] = useState(true);
     useEffect(() => {
@@ -22,4 +22,4 @@ function Provider({ children }) {
     );
 }
 export default AuthContext;
-export { Provider };
+export { AuthContextProvider };

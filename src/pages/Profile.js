@@ -8,6 +8,7 @@ import { db, auth } from "../firebase";
 import { toast } from "react-toastify";
 import useAuthContext from "../hooks/useAuthContext";
 import StandardInput from "../components/StandardInput";
+import MyListings from "../components/MyListings";
 
 export default function Profile() {
     const [isOnEdit, setIsOnEdit] = useState(false);
@@ -63,26 +64,30 @@ export default function Profile() {
         <div>
             <MainTitle>Profile</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
-                <div className="w-full md:w-[67%] lg:w-[50%]">
+                <div className="w-full sm:w-[65%] md:w-[70%] lg:w-[40%]">
                     <form onSubmit={handleFormSubmit}>
-                        <label htmlFor="name">Name</label>
-                        <StandardInput
-                            rounded
-                            type="text"
-                            id="name"
-                            value={name}
-                            disabled={!isOnEdit}
-                            onChange={handleOnChange}
-                        />
-                        <label htmlFor="email">Email</label>
-                        <StandardInput
-                            rounded
-                            type="email"
-                            id="email"
-                            disabled
-                            value={email}
-                            onChange={handleOnChange}
-                        />
+                        <div className="mb-6">
+                            <label htmlFor="name">Name</label>
+                            <StandardInput
+                                rounded
+                                type="text"
+                                id="name"
+                                value={name}
+                                disabled={!isOnEdit}
+                                onChange={handleOnChange}
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="email">Email</label>
+                            <StandardInput
+                                rounded
+                                type="email"
+                                id="email"
+                                disabled
+                                value={email}
+                                onChange={handleOnChange}
+                            />
+                        </div>
                         <div hidden={!isOnEdit}>
                             <div className="flex justify-between mb-6">
                                 <Button onClick={handleFormSubmit} primary rounded>
@@ -123,6 +128,11 @@ export default function Profile() {
                     <Button primary rounded onClick={() => navigate("/sell")}>
                         Have something to sell?
                     </Button>
+                </div>
+            </div>
+            <div className="flex justify-center flex-wrap items-center px-6 mb-6 max-w-6xl mx-auto">
+                <div className="w-full md:w-[70%] lg:w-[80%]">
+                    <MyListings />
                 </div>
             </div>
         </div>

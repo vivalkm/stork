@@ -2,11 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { Provider } from "./context/AuthContext";
+import { AuthContextProvider } from "./context/AuthContext";
+import { MyListingsContextProvider } from "./context/MyListingsContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <Provider>
-        <App />
-    </Provider>
+    <AuthContextProvider>
+        <MyListingsContextProvider>
+            <App />
+        </MyListingsContextProvider>
+    </AuthContextProvider>
 );

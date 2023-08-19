@@ -59,7 +59,7 @@ export default function SignIn() {
         <div>
             <MainTitle>Sign In</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
-                <div className="w-full md:w-[67%] lg:w-[50%]">
+                <div className="w-full sm:w-[65%] md:w-[70%] lg:w-[40%]">
                     <form onSubmit={handleSignIn}>
                         <div className="mb-6">
                             <StandardInput

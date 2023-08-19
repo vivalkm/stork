@@ -59,7 +59,12 @@ export default function Sell() {
                     })
                 )
             );
-            const formDataCopy = { ...formData, imgUrls: imgUrls, timestamp: serverTimestamp() };
+            const formDataCopy = {
+                ...formData,
+                imgUrls: imgUrls,
+                uid: auth.currentUser.uid,
+                timestamp: serverTimestamp(),
+            };
             delete formDataCopy.images;
 
             // upload list info to firestore
@@ -97,6 +102,8 @@ export default function Sell() {
                             break;
                         case "running":
                             console.log("Upload is running");
+                            break;
+                        default:
                             break;
                     }
                 },

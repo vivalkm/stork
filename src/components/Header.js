@@ -23,7 +23,7 @@ export default function Header() {
                     />
                 </div>
                 <div className="mr-2 whitespace-nowrap">
-                    <ul className="flex space-x-10">
+                    <ul className="flex space-x-2 md:space-x-5 lg:space-x-10">
                         <li
                             className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${
                                 pathMatchRoute("/")

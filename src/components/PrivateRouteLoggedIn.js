@@ -9,5 +9,5 @@ export default function PrivateRouteProfile({ needLoggedIn, pathIfFalse }) {
     if (checkingStatus) {
         return <Spinner />;
     }
-    return loggedIn == needLoggedIn ? <Outlet /> : <Navigate to={pathIfFalse} />;
+    return loggedIn === needLoggedIn ? <Outlet /> : <Navigate to={pathIfFalse} />;
 }
