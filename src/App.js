@@ -22,7 +22,7 @@ function App() {
                     <Route
                         path="/profile"
                         element={
-                            <PrivateRouteLoggedIn needLoggedIn={true} pathIfFalse={"/sign-in"} />
+                            <PrivateRouteLoggedIn needLoggedIn={true} pathIfFalse={"/signin"} />
                         }
                     >
                         <Route path="/profile" element={<Profile />} />

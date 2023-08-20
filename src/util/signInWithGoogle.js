@@ -22,7 +22,7 @@ export default async function handleGoogleSignIn() {
                 timestamp: serverTimestamp(),
             });
         }
-        toast.success("Sign up was successful!");
+        toast.success("Sign in was successful!");
         return true;
     } catch (error) {
         toast.error(error.message);

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainTitle from "./MainTitle";
 import useMyListingsContext from "../hooks/useMyListingsContext";
 import ListingCard from "./ListingCard";
 
 export default function MyListings() {
-    const { loading, listings } = useMyListingsContext();
+    const { loading, listings, fetchMyListings } = useMyListingsContext();
+
+    useEffect(() => {
+        fetchMyListings();
+    }, [fetchMyListings]);
+
     const renderedListings = listings.map((listing, index) => {
         return <ListingCard key={index} listing={listing} />;
     });
-    if (!loading) {
+    if (!loading && renderedListings.length > 0) {
         return (
             <div>
                 <MainTitle>My Listings</MainTitle>

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { auth, db } from "../firebase";
 import { collection, deleteDoc, doc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -10,27 +10,29 @@ function MyListingsContextProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
 
-    useEffect(() => {
+    const fetchMyListings = useCallback(() => {
         // instead of calling auth.currentUser, make the user call asynchronous by subscribing to the auth observable instead
         onAuthStateChanged(auth, (user) => {
-            const fetchCurrentUserListing = async () => {
-                const q = query(
-                    collection(db, "listings"),
-                    where("uid", "==", user.uid),
-                    orderBy("timestamp", "desc")
-                );
-                const querySnapshot = await getDocs(q);
-                const newListings = [];
-                querySnapshot.forEach((doc) => {
-                    newListings.push({ ...doc.data(), id: doc.id });
-                });
+            if (user) {
+                const fetchCurrentUserListings = async () => {
+                    const q = query(
+                        collection(db, "listings"),
+                        where("uid", "==", user.uid),
+                        orderBy("timestamp", "desc")
+                    );
+                    const querySnapshot = await getDocs(q);
+                    const newListings = [];
+                    querySnapshot.forEach((doc) => {
+                        newListings.push({ ...doc.data(), id: doc.id });
+                    });
 
-                setListings(newListings);
-                setLoading(false);
-            };
-            fetchCurrentUserListing();
+                    setListings(newListings);
+                    setLoading(false);
+                };
+                fetchCurrentUserListings();
+            }
         });
-    }, [listings]);
+    }, []);
 
     /**
      *
@@ -67,7 +69,9 @@ function MyListingsContextProvider({ children }) {
     };
 
     return (
-        <MyListingsContext.Provider value={{ loading, listings, deleteListingById, deleteImages }}>
+        <MyListingsContext.Provider
+            value={{ loading, listings, deleteListingById, deleteImages, fetchMyListings }}
+        >
             {children}
         </MyListingsContext.Provider>
     );
