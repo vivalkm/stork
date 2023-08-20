@@ -11,6 +11,7 @@ import Toast from "./components/Toast";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRouteLoggedIn from "./components/PrivateRouteLoggedIn";
 import Sell from "./pages/Sell";
+import EditListing from "./pages/EditListing";
 
 function App() {
     return (
@@ -54,6 +55,7 @@ function App() {
                         <Route path="/sell" element={<Sell />} />
                     </Route>
                     <Route path="/listings/:categoryName/:listingId" element={<Listing />} />
+                    <Route path="/edit-listing/:listingId" element={<EditListing />} />
                 </Routes>
             </Router>
             <Toast />

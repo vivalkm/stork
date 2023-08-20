@@ -18,7 +18,7 @@ export default function ListingCard({ listing }) {
 
     const handleOnDelete = () => {
         if (window.confirm(`Are you sure to delete item ${listing.name}?`)) {
-            deleteImages(listing.imageNames);
+            deleteImages(listing.imagesInfo);
             if (deleteListingById(listing.id)) {
                 toast.success(`Listing for ${listing.name} is deleted.`);
             } else {
@@ -27,13 +27,22 @@ export default function ListingCard({ listing }) {
         }
     };
 
+    // get cover image, if not set, then choose the first image
+    let coverImage = listing.imagesInfo[0];
+    for (let imageInfo of listing.imagesInfo) {
+        if (imageInfo.isCover) {
+            coverImage = imageInfo;
+            break;
+        }
+    }
+
     return (
         <li className="relative mt-4 bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
             <Link className="contents" to={`/listings/${listing.category}/${listing.id}`}>
                 <img
                     className="w-full h-[170px] object-scale-down hover:scale-105 transition-scale duration-200 ease-in"
                     loading="lazy"
-                    src={listing.imgUrls[0]}
+                    src={coverImage.imgUrl}
                     alt="cover"
                 />
                 <Moment

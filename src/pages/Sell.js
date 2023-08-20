@@ -44,37 +44,39 @@ export default function Sell() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
-        if (images.length > 7) {
-            toast.error("Maximum 7 images are allowed.");
+        if (images.length > 6) {
+            toast.error("Maximum 6 images are allowed.");
             setLoading(false);
             return;
         } else {
-            let imageNames = [];
-            // get the array of urls for all images uploaded
-            const imgUrls = await Promise.all(
-                [...images].map((image) =>
-                    storeImage(image, imageNames).catch((error) => {
+            // get the array of image obj {imgName, imgUrl} for all images uploaded
+            const uploadedImages = await Promise.all(
+                [...images].map((img) =>
+                    storeImage(img).catch((error) => {
                         setLoading(false);
                         toast.error("Images not uploaded.");
                         return;
                     })
                 )
             );
+
+            // upload list info to firestore
             const formDataCopy = {
                 ...formData,
-                imgUrls: imgUrls,
-                imageNames,
+                imagesInfo: uploadedImages,
+                images,
                 uid: auth.currentUser.uid,
                 timestamp: serverTimestamp(),
             };
             delete formDataCopy.images;
-
-            // upload list info to firestore
-            const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-
-            setLoading(false);
-            toast.success("Listing created");
-            navigate(`/listings/${formDataCopy.category}/${docRef.id}`);
+            try {
+                const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+                setLoading(false);
+                toast.success("Listing created");
+                navigate(`/listings/${formDataCopy.category}/${docRef.id}`);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 
@@ -83,9 +85,9 @@ export default function Sell() {
      * ref: https://firebase.google.com/docs/storage/web/upload-files
      *
      * @param {*} image is an image file
-     * @returns a Promise with the storage url of image if resolved, or an error if rejected
+     * @returns a Promise with the image obj {imgName, imgUrl} if resolved, or an error if rejected
      */
-    const storeImage = async (image, imageNames) => {
+    const storeImage = async (image) => {
         const storage = getStorage();
         return new Promise((resolve, reject) => {
             const filename = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
@@ -116,8 +118,7 @@ export default function Sell() {
                     // Handle successful uploads on complete
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        imageNames.push(filename);
-                        resolve(downloadURL);
+                        resolve({ imgName: filename, imgUrl: downloadURL });
                     });
                 }
             );
@@ -260,6 +261,7 @@ export default function Sell() {
                     </Button>
                 </div>
             </form>
+            <div className="mb-6 "></div>
         </div>
     );
 }

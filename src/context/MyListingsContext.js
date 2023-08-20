@@ -62,15 +62,24 @@ function MyListingsContextProvider({ children }) {
         await deleteObject(storageRef);
     };
 
-    const deleteImages = (imgNames) => {
-        imgNames.forEach((imgName) => {
-            deleteImageByName(imgName);
-        });
+    const deleteImages = (imagesInfo) => {
+        if (imagesInfo?.length > 0) {
+            imagesInfo.forEach((imageInfo) => {
+                deleteImageByName(imageInfo.imgName);
+            });
+        }
     };
 
     return (
         <MyListingsContext.Provider
-            value={{ loading, listings, deleteListingById, deleteImages, fetchMyListings }}
+            value={{
+                loading,
+                listings,
+                deleteListingById,
+                deleteImages,
+                fetchMyListings,
+                deleteImageByName,
+            }}
         >
             {children}
         </MyListingsContext.Provider>

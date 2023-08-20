@@ -36,13 +36,13 @@ export default function Listing() {
     if (loading) {
         return <div>Loading</div>;
     } else {
-        const renderedSlide = listing.imgUrls.map((url, index) => {
+        const renderedSlide = listing.imagesInfo.map((imgInfo, index) => {
             return (
                 <SwiperSlide key={index}>
                     <div
                         className="relative w-full overflow-hidden h-[300px]  rounded"
                         style={{
-                            background: `url(${url}) center no-repeat`,
+                            background: `url(${imgInfo.imgUrl}) center no-repeat`,
                             backgroundSize: "cover",
                         }}
                     ></div>
