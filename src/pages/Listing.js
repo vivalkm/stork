@@ -13,6 +13,7 @@ import { MdLocationOn } from "react-icons/md";
 import useAuthContext from "../hooks/useAuthContext";
 import Button from "../components/Button";
 import Contact from "../components/Contact";
+import Map from "../components/Map";
 
 export default function Listing() {
     const params = useParams();
@@ -83,8 +84,8 @@ export default function Listing() {
                         </Swiper>
                     </div>
                 </div>
-                <div className="flex flex-col md:flex-row max-w-6xl lg:mx-auto p-4 rounded-lg shadow-lg lg: space-x-5">
-                    <div className="w-full ">
+                <div className="flex flex-col ml-6 mr-6 bg-white md:flex-row max-w-6xl p-4 rounded-lg shadow-lg lg: space-x-5">
+                    <div className="w-full">
                         <div className={`text-[${primary_blue}] mb-3 font-bold text-2xl`}>
                             {listing.name}
                         </div>
@@ -122,7 +123,9 @@ export default function Listing() {
                             </div>
                         )}
                     </div>
-                    <div className="w-full z-10 overflow-x-hidden"></div>
+                    <div className="bg-gray-200 w-full z-10">
+                        <Map listing={listing} />
+                    </div>
                 </div>
                 <div className="mb-6"></div>
             </div>
