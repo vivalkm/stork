@@ -40,25 +40,6 @@ export default function ListingCard({ listing, editOn }) {
         }
     }
 
-    const editSection = () => {
-        if (editOn) {
-            return (
-                <div className="absolute top-2 right-2 flex space-x-1 text-lg">
-                    <AiFillEdit
-                        className="text-gray-400 hover:text-gray-700 cursor-pointer"
-                        onClick={() => {
-                            navigate(`/edit-listing/${listing.id}`);
-                        }}
-                    />
-                    <AiFillDelete
-                        className="text-red-400 hover:text-red-600 cursor-pointer"
-                        onClick={handleOnDelete}
-                    />
-                </div>
-            );
-        }
-    };
-
     return (
         <li className="relative mt-4 bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
             <Link className="contents" to={`/listings/${listing.category}/${listing.id}`}>
@@ -93,7 +74,20 @@ export default function ListingCard({ listing, editOn }) {
                     </span>
                 </div>
             </Link>
-            <div>{editSection()}</div>
+            {editOn && (
+                <div className="absolute top-2 right-2 flex space-x-1 text-lg">
+                    <AiFillEdit
+                        className="text-gray-400 hover:text-gray-700 cursor-pointer"
+                        onClick={() => {
+                            navigate(`/edit-listing/${listing.id}`);
+                        }}
+                    />
+                    <AiFillDelete
+                        className="text-red-400 hover:text-red-600 cursor-pointer"
+                        onClick={handleOnDelete}
+                    />
+                </div>
+            )}
         </li>
     );
 }
