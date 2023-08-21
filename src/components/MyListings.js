@@ -11,8 +11,9 @@ export default function MyListings() {
     }, [fetchListings]);
 
     const renderedListings = listings.map((listing, index) => {
-        return <ListingCard key={index} listing={listing} />;
+        return <ListingCard key={index} listing={listing} editOn={true} />;
     });
+    
     if (!loading && renderedListings.length > 0) {
         return (
             <div>

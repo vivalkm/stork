@@ -7,23 +7,27 @@ import { primary_blue } from "../util/colors";
 import useMyListingsContext from "../hooks/useMyListingsContext";
 import { toast } from "react-toastify";
 
-export default function ListingCard({ listing }) {
+export default function ListingCard({ listing, editOn }) {
     const numToDelimited = (num) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
-    const { deleteListingById, deleteImages } = useMyListingsContext();
+    const { deleteListingById, deleteImages, uid } = useMyListingsContext();
 
     const navigate = useNavigate();
 
     const handleOnDelete = () => {
-        if (window.confirm(`Are you sure to delete item ${listing.name}?`)) {
-            deleteImages(listing.imagesInfo);
-            if (deleteListingById(listing.id)) {
-                toast.success(`Listing for ${listing.name} is deleted.`);
-            } else {
-                toast.success(`Failed to delete listing for ${listing.name}.`);
+        if (listing.uid === uid) {
+            if (window.confirm(`Are you sure to delete item ${listing.name}?`)) {
+                deleteImages(listing.imagesInfo);
+                if (deleteListingById(listing.id)) {
+                    toast.success(`Listing for ${listing.name} is deleted.`);
+                } else {
+                    toast.success(`Failed to delete listing for ${listing.name}.`);
+                }
             }
+        } else {
+            toast.error("You don't have the permission.");
         }
     };
 
@@ -35,6 +39,25 @@ export default function ListingCard({ listing }) {
             break;
         }
     }
+
+    const editSection = () => {
+        if (editOn) {
+            return (
+                <div className="absolute top-2 right-2 flex space-x-1 text-lg">
+                    <AiFillEdit
+                        className="text-gray-400 hover:text-gray-700 cursor-pointer"
+                        onClick={() => {
+                            navigate(`/edit-listing/${listing.id}`);
+                        }}
+                    />
+                    <AiFillDelete
+                        className="text-red-400 hover:text-red-600 cursor-pointer"
+                        onClick={handleOnDelete}
+                    />
+                </div>
+            );
+        }
+    };
 
     return (
         <li className="relative mt-4 bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
@@ -70,18 +93,7 @@ export default function ListingCard({ listing }) {
                     </span>
                 </div>
             </Link>
-            <div className="absolute top-2 right-2 flex space-x-1 text-lg">
-                <AiFillEdit
-                    className="text-gray-400 hover:text-gray-700 cursor-pointer"
-                    onClick={() => {
-                        navigate(`/edit-listing/${listing.id}`);
-                    }}
-                />
-                <AiFillDelete
-                    className="text-red-400 hover:text-red-600 cursor-pointer"
-                    onClick={handleOnDelete}
-                />
-            </div>
+            <div>{editSection()}</div>
         </li>
     );
 }

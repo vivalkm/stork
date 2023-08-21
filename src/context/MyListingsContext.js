@@ -9,6 +9,7 @@ const MyListingsContext = createContext();
 function MyListingsContextProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
+    const [uid, setUid] = useState(null);
 
     /**
      * Fetch all listings created by current user
@@ -17,6 +18,7 @@ function MyListingsContextProvider({ children }) {
         // instead of calling auth.currentUser, make the user call asynchronous by subscribing to the auth observable instead
         onAuthStateChanged(auth, (user) => {
             if (user) {
+                setUid(user.uid);
                 const fetchCurrentUserListings = async () => {
                     const q = query(
                         collection(db, "listings"),
@@ -62,7 +64,11 @@ function MyListingsContextProvider({ children }) {
         const storageRef = ref(storage, imgName);
 
         // Delete the file
-        await deleteObject(storageRef);
+        try {
+            await deleteObject(storageRef);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const deleteImages = (imagesInfo) => {
@@ -78,6 +84,7 @@ function MyListingsContextProvider({ children }) {
             value={{
                 loading,
                 listings,
+                uid,
                 deleteListingById,
                 deleteImages,
                 fetchListings,

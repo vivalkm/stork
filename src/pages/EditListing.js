@@ -14,6 +14,7 @@ import { useNavigate, useParams } from "react-router";
 import useMyListingsContext from "../hooks/useMyListingsContext";
 
 export default function EditListing() {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({
         category: null,
@@ -30,8 +31,6 @@ export default function EditListing() {
     // track imageInfo for images to be deleted
     const [imagesDeleted, setImagesDeleted] = useState([]);
 
-    const { deleteImages } = useMyListingsContext();
-
     // get listing data from firestore
     const params = useParams();
     useEffect(() => {
@@ -46,7 +45,13 @@ export default function EditListing() {
         fetchListing();
     }, [params.listingId]);
 
-    const navigate = useNavigate();
+    const { deleteImages, uid } = useMyListingsContext();
+
+    // check current user must be equal to user who created the listing
+    if (!loading && formData.uid !== uid) {
+        toast.error("You don't have permission to edit this listing.");
+        navigate("/");
+    }
 
     // controlled input for the form data
     const handleOnClick = (event) => {

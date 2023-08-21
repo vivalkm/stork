@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { db } from "../firebase";
 import ListingCard from "./ListingCard";
 import MainTitle from "./MainTitle";
+import Spinner from "./Spinner";
 
 export default function MyListings() {
     const [loading, setLoading] = useState(true);
@@ -28,17 +29,23 @@ export default function MyListings() {
     useEffect(() => {
         fetchListings();
     }, [fetchListings]);
+    
     const renderedListings = listings.map((listing, index) => {
-        return <ListingCard key={index} listing={listing} />;
+        return <ListingCard key={index} listing={listing} editOn={false}/>;
     });
-    if (!loading && renderedListings.length > 0) {
-        return (
-            <div>
-                <MainTitle>My Listings</MainTitle>
-                <ul className="gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                    {renderedListings}
-                </ul>
-            </div>
-        );
+
+    if (loading) {
+        return <Spinner />
+    } else {
+        if (renderedListings.length > 0) {
+            return (
+                <div>
+                    <MainTitle>All Listings</MainTitle>
+                    <ul className="gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                        {renderedListings}
+                    </ul>
+                </div>
+            );
+        }
     }
 }
