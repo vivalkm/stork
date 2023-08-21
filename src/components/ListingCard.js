@@ -1,7 +1,7 @@
 import React from "react";
 import Moment from "react-moment";
 import { Link, useNavigate } from "react-router-dom";
-import { CiLocationOn } from "react-icons/ci";
+import { MdLocationOn } from "react-icons/md";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { primary_blue } from "../util/colors";
 import useMyListingsContext from "../hooks/useMyListingsContext";
@@ -51,8 +51,8 @@ export default function ListingCard({ listing }) {
                 >
                     {listing.timestamp?.toDate()}
                 </Moment>
-                <div className="w-full p-[10px] flex space-x-1">
-                    <CiLocationOn className="h-4 w-4 text-green-600" />
+                <div className="w-full p-[10px] flex justify-center space-x-1">
+                    <MdLocationOn className="h-5 w-5 text-green-600" />
                     <p className="font-semibold text-sm text-gray-600 truncate">
                         {listing.address}
                     </p>

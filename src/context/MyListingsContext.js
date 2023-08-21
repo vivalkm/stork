@@ -10,7 +10,10 @@ function MyListingsContextProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
 
-    const fetchMyListings = useCallback(() => {
+    /**
+     * Fetch all listings created by current user
+     */
+    const fetchListings = useCallback(() => {
         // instead of calling auth.currentUser, make the user call asynchronous by subscribing to the auth observable instead
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -77,7 +80,7 @@ function MyListingsContextProvider({ children }) {
                 listings,
                 deleteListingById,
                 deleteImages,
-                fetchMyListings,
+                fetchListings,
                 deleteImageByName,
             }}
         >

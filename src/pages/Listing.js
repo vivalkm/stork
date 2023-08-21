@@ -29,7 +29,7 @@ export default function Listing() {
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + "</span>";
+            return '<span class="' + className + '"></span>';
         },
     };
 
@@ -40,10 +40,10 @@ export default function Listing() {
             return (
                 <SwiperSlide key={index}>
                     <div
-                        className="relative w-full overflow-hidden h-[300px]  rounded"
+                        className="relative w-full overflow-hidden h-[300px] rounded"
                         style={{
                             background: `url(${imgInfo.imgUrl}) center no-repeat`,
-                            backgroundSize: "cover",
+                            backgroundSize: "contain",
                         }}
                     ></div>
                 </SwiperSlide>

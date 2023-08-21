@@ -4,11 +4,11 @@ import useMyListingsContext from "../hooks/useMyListingsContext";
 import ListingCard from "./ListingCard";
 
 export default function MyListings() {
-    const { loading, listings, fetchMyListings } = useMyListingsContext();
+    const { loading, listings, fetchListings } = useMyListingsContext();
 
     useEffect(() => {
-        fetchMyListings();
-    }, [fetchMyListings]);
+        fetchListings();
+    }, [fetchListings]);
 
     const renderedListings = listings.map((listing, index) => {
         return <ListingCard key={index} listing={listing} />;
@@ -17,7 +17,7 @@ export default function MyListings() {
         return (
             <div>
                 <MainTitle>My Listings</MainTitle>
-                <ul className="space-x-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                <ul className="gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {renderedListings}
                 </ul>
             </div>
