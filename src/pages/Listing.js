@@ -85,7 +85,7 @@ export default function Listing() {
                         </Swiper>
                     </div>
                 </div>
-                <div className="flex flex-col justify-center mx-auto bg-white md:flex-row max-w-4xl p-4 rounded-b-lg shadow-lg lg: space-x-5">
+                <div className="grid sm:grid-cols-2 gap-2 mx-auto bg-white md:flex-row max-w-4xl p-4 rounded-b-lg shadow-lg ">
                     <div className="w-full">
                         <div className={`text-[${primary_blue}] mb-3 font-bold text-2xl`}>
                             {listing.name}
