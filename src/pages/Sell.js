@@ -15,16 +15,15 @@ import { useNavigate } from "react-router";
 export default function Sell() {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        category: null,
+        category: "sale",
         name: "",
         address: "",
         description: "",
         regPrice: 0,
-        discountedPrice: 0,
         images: {},
     });
 
-    const { name, address, description, regPrice, discountedPrice, images } = formData;
+    const { name, address, description, regPrice, images } = formData;
 
     const navigate = useNavigate();
 
@@ -131,37 +130,37 @@ export default function Sell() {
 
     return (
         <div className="max-w-md px-2 mx-auto">
-            <MainTitle>Sell An Item</MainTitle>
-            <form onSubmit={handleFormSubmit}>
-                <label className="text-lg mt-6 font-semibold">Sell / Rent</label>
+            <MainTitle>List An Item</MainTitle>
+            <form onSubmit={handleFormSubmit} className="mt-6">
+                <label className="text-sm mt-6 font-semibold">For Sale / For Free</label>
                 <div className="flex">
                     <div className="w-full mr-2">
                         <OptionButton
                             type="button"
                             id="category"
-                            value="sell"
+                            value="sale"
                             rounded
                             onClick={handleOnClick}
-                            highLight={formData.category === "sell"}
+                            highLight={formData.category === "sale"}
                         >
-                            Sell
+                            Sale
                         </OptionButton>
                     </div>
                     <div className="w-full ml-2">
                         <OptionButton
                             type="button"
                             id="category"
-                            value="rent"
+                            value="free"
                             rounded
                             onClick={handleOnClick}
-                            highLight={formData.category === "rent"}
+                            highLight={formData.category === "free"}
                         >
-                            Rent
+                            Free
                         </OptionButton>
                     </div>
                 </div>
                 <div className="mt-6">
-                    <label htmlFor="name" className="text-lg mt-6 font-semibold">
+                    <label htmlFor="name" className="text-sm mt-6 font-semibold">
                         Name
                     </label>
                     <StandardInput
@@ -176,7 +175,7 @@ export default function Sell() {
                     />
                 </div>
                 <div className="mt-6">
-                    <label htmlFor="address" className="text-lg font-semibold">
+                    <label htmlFor="address" className="text-sm font-semibold">
                         Address
                     </label>
                     <StandardInput
@@ -190,7 +189,7 @@ export default function Sell() {
                     />
                 </div>
                 <div className="mt-6">
-                    <label htmlFor="description" className="text-lg font-semibold">
+                    <label htmlFor="description" className="text-sm font-semibold">
                         Description
                     </label>
                     <StandardTextArea
@@ -205,40 +204,27 @@ export default function Sell() {
                         Description
                     </StandardTextArea>
                 </div>
-                <div className="mt-6 flex">
-                    <div className="mr-2 w-full">
-                        <label htmlFor="regPrice" className="text-lg font-semibold">
-                            Regular Price
-                        </label>
-                        <StandardInput
-                            type="number"
-                            id="regPrice"
-                            value={regPrice}
-                            onChange={handleOnChange}
-                            textSmall
-                            min="0"
-                            required
-                            rounded
-                        />
+                {formData.category === "sale" && (
+                    <div className="mt-6 flex">
+                        <div className="mr-2 w-full">
+                            <label htmlFor="regPrice" className="text-sm font-semibold">
+                                Price
+                            </label>
+                            <StandardInput
+                                type="number"
+                                id="regPrice"
+                                value={regPrice}
+                                onChange={handleOnChange}
+                                textSmall
+                                min="0"
+                                required
+                                rounded
+                            />
+                        </div>
                     </div>
-                    <div className="ml-2 w-full">
-                        <label htmlFor="discountedPrice" className="text-lg font-semibold">
-                            Discounted Price
-                        </label>
-                        <StandardInput
-                            type="number"
-                            id="discountedPrice"
-                            value={discountedPrice}
-                            onChange={handleOnChange}
-                            textSmall
-                            min="0"
-                            max={regPrice}
-                            rounded
-                        />
-                    </div>
-                </div>
+                )}
                 <div className="mt-6">
-                    <label htmlFor="images" className="text-lg font-semibold">
+                    <label htmlFor="images" className="text-sm font-semibold">
                         Images
                     </label>
                     <StandardInput

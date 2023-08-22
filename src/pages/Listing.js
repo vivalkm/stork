@@ -10,10 +10,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectFade, Navigation } from "swiper/modules";
 import { primary_blue } from "../util/colors";
 import { MdLocationOn } from "react-icons/md";
+import { TbCurrencyDollarOff, TbCurrencyDollar } from "react-icons/tb";
 import useAuthContext from "../hooks/useAuthContext";
 import Button from "../components/Button";
 import Contact from "../components/Contact";
 import Map from "../components/Map";
+import { icons } from "react-icons";
 
 export default function Listing() {
     const params = useParams();
@@ -56,7 +58,7 @@ export default function Listing() {
                         className="relative w-full overflow-hidden h-[300px] rounded"
                         style={{
                             background: `url(${imgInfo.imgUrl}) center no-repeat`,
-                            backgroundSize: "contain",
+                            backgroundSize: "cover",
                         }}
                     ></div>
                 </SwiperSlide>
@@ -65,8 +67,8 @@ export default function Listing() {
 
         return (
             <div>
-                <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
-                    <div className="w-full md:w-[50%]">
+                <div className="flex justify-center flex-wrap items-center mb-6 max-w-6xl mx-auto">
+                    <div className="w-full rounded">
                         <Swiper
                             spaceBetween={30}
                             centeredSlides={true}
@@ -97,13 +99,22 @@ export default function Listing() {
                             <span className="font-semibold">Description - </span>
                             {listing.description}
                         </div>
-                        <div className="text-semibold">
-                            <span className="font-semibold mt-3 mb-3">Price - </span>$
-                            {numToDelimited(listing.regPrice)}
-                        </div>
-                        <div className="font-semibold mt-3 mb-3">
-                            <span className="font-semibold ">Category - </span>
-                            {listing.category}
+                        {listing.category !== "free" && (
+                            <div className="text-semibold">
+                                <span className="font-semibold mt-3 mb-3">Price - </span>$
+                                {numToDelimited(listing.regPrice)}
+                            </div>
+                        )}
+                        <div className="flex font-semibold mt-3 mb-3 items-center">
+                            {listing.category === "free" && (
+                                <TbCurrencyDollarOff className="h-4 w-4" />
+                            )}
+                            {listing.category === "sale" && (
+                                <TbCurrencyDollar className="h-4 w-4" />
+                            )}
+                            <div className="ml-1 capitalize text-sm font-bold">
+                                {listing.category}
+                            </div>
                         </div>
                         {user?.uid !== listing.uid && !contactSeller && (
                             <div>
@@ -123,7 +134,7 @@ export default function Listing() {
                             </div>
                         )}
                     </div>
-                    <div className="bg-gray-200 w-full z-10">
+                    <div className="bg-gray-200 w-full z-10 rounded">
                         <Map listing={listing} />
                     </div>
                 </div>

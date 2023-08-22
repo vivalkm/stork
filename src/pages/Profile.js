@@ -63,11 +63,13 @@ export default function Profile() {
     return (
         <div>
             <MainTitle>Profile</MainTitle>
-            <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
+            <div className="flex justify-center flex-wrap items-center px-6 py-6 max-w-6xl mx-auto">
                 <div className="w-full sm:w-[70%] md:w-[70%] lg:w-[45%]">
                     <form onSubmit={handleFormSubmit}>
                         <div className="mb-6">
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="name" className="text-sm font-semibold">
+                                Name
+                            </label>
                             <StandardInput
                                 rounded
                                 type="text"
@@ -78,7 +80,9 @@ export default function Profile() {
                             />
                         </div>
                         <div className="mb-6">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email" className="text-sm font-semibold">
+                                Email
+                            </label>
                             <StandardInput
                                 rounded
                                 type="email"
@@ -105,7 +109,7 @@ export default function Profile() {
                             </div>
                         </div>
                         <div
-                            className="mb-6 text-sm whitespace-nowrap sm:flex sm:justify-between sm:text-lg"
+                            className="mb-6 text-sm whitespace-nowrap sm:flex sm:justify-between "
                             hidden={isOnEdit}
                         >
                             <p>

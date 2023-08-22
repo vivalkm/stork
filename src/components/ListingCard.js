@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 export default function ListingCard({ listing, editOn }) {
     const numToDelimited = (num) => {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     const { deleteListingById, deleteImages, uid } = useMyListingsContext();
@@ -62,12 +62,11 @@ export default function ListingCard({ listing, editOn }) {
                     </p>
                 </div>
                 <div className="font-semibold text-xl truncate">{listing.name}</div>
-                <p className="font-semibold text-gray-700 text-sm">
-                    $
-                    {listing.offer
-                        ? numToDelimited(listing.discountedPrice)
-                        : numToDelimited(listing.regPrice)}
-                </p>
+                {listing.category !== "free" && (
+                    <p className="font-semibold text-gray-700 text-sm">
+                        ${numToDelimited(listing.regPrice)}
+                    </p>
+                )}
                 <div className="px-6 pt-4 pb-2">
                     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                         {listing.category}

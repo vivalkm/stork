@@ -79,7 +79,7 @@ export default function SignUp() {
     return (
         <div>
             <MainTitle>Sign Up</MainTitle>
-            <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
+            <div className="flex justify-center flex-wrap items-center px-6 py-6 max-w-6xl mx-auto">
                 <div className="w-full sm:w-[65%] md:w-[70%] lg:w-[40%]">
                     <form onSubmit={handleSignUp}>
                         <div className="mb-6">
@@ -124,7 +124,7 @@ export default function SignUp() {
                                 />
                             )}
                         </div>
-                        <div className="mb-6 text-sm whitespace-nowrap sm:flex sm:justify-between sm:text-lg">
+                        <div className="mb-6 text-sm whitespace-nowrap sm:flex sm:justify-between">
                             <p>
                                 Have an account?{" "}
                                 <Link
