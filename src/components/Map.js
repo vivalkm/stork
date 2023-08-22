@@ -13,12 +13,13 @@ export default function Map({ listing }) {
 
             const response = await axios.get(url);
             const pos = response.data[0];
-            setPosition([pos.lat, pos.lon]);
+            // default lat = 0 lon = 0 if pos not avaiable
+            setPosition([pos ? pos.lat : 0, pos ? pos.lon : 0]);
             setLoading(false);
         };
         getPosition();
     }, [listing]);
-
+i
     if (!loading)
         return (
             <MapContainer
@@ -27,10 +28,7 @@ export default function Map({ listing }) {
                 scrollWheelZoom={false}
                 style={{ height: "100%", width: "100%" }}
             >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <Marker position={position}>
                     <Popup>{listing.address}</Popup>
                 </Marker>
