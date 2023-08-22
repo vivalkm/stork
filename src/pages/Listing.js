@@ -15,7 +15,6 @@ import useAuthContext from "../hooks/useAuthContext";
 import Button from "../components/Button";
 import Contact from "../components/Contact";
 import Map from "../components/Map";
-import { icons } from "react-icons";
 
 export default function Listing() {
     const params = useParams();
@@ -55,10 +54,10 @@ export default function Listing() {
             return (
                 <SwiperSlide key={index}>
                     <div
-                        className="relative w-full overflow-hidden h-[300px] rounded"
+                        className="relative w-full overflow-hidden h-[400px]"
                         style={{
                             background: `url(${imgInfo.imgUrl}) center no-repeat`,
-                            backgroundSize: "cover",
+                            backgroundSize: "contain",
                         }}
                     ></div>
                 </SwiperSlide>
@@ -67,8 +66,8 @@ export default function Listing() {
 
         return (
             <div>
-                <div className="flex justify-center flex-wrap items-center mb-6 max-w-6xl mx-auto">
-                    <div className="w-full rounded">
+                <div className="flex justify-center flex-wrap items-center max-w-4xl mx-auto rounded-t-lg shadow-lg">
+                    <div className="w-full">
                         <Swiper
                             spaceBetween={30}
                             centeredSlides={true}
@@ -86,7 +85,7 @@ export default function Listing() {
                         </Swiper>
                     </div>
                 </div>
-                <div className="flex flex-col ml-6 mr-6 bg-white md:flex-row max-w-6xl p-4 rounded-lg shadow-lg lg: space-x-5">
+                <div className="flex flex-col justify-center mx-auto bg-white md:flex-row max-w-4xl p-4 rounded-b-lg shadow-lg lg: space-x-5">
                     <div className="w-full">
                         <div className={`text-[${primary_blue}] mb-3 font-bold text-2xl`}>
                             {listing.name}
@@ -105,15 +104,17 @@ export default function Listing() {
                                 {numToDelimited(listing.regPrice)}
                             </div>
                         )}
-                        <div className="flex font-semibold mt-3 mb-3 items-center">
-                            {listing.category === "free" && (
-                                <TbCurrencyDollarOff className="h-4 w-4" />
-                            )}
-                            {listing.category === "sale" && (
-                                <TbCurrencyDollar className="h-4 w-4" />
-                            )}
-                            <div className="ml-1 capitalize text-sm font-bold">
-                                {listing.category}
+                        <div className="flex font-semibold mt-3 mb-3">
+                            <div className="bg-gray-200 rounded-full flex px-2 py-1 items-center">
+                                {listing.category === "free" && (
+                                    <TbCurrencyDollarOff className="h-4 w-4" />
+                                )}
+                                {listing.category === "sale" && (
+                                    <TbCurrencyDollar className="h-4 w-4" />
+                                )}
+                                <div className="capitalize text-sm font-bold">
+                                    {listing.category}
+                                </div>
                             </div>
                         </div>
                         {user?.uid !== listing.uid && !contactSeller && (

@@ -134,8 +134,8 @@ export default function Profile() {
                     </Button>
                 </div>
             </div>
-            <div className="flex justify-center flex-wrap items-center px-6 mb-6 max-w-6xl mx-auto">
-                <div className="w-full md:w-[70%] lg:w-[80%]">
+            <div className="flex justify-center flex-wrap items-center px-6 mb-6 max-w-7xl mx-auto">
+                <div>
                     <MyListings />
                 </div>
             </div>

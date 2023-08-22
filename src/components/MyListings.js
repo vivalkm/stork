@@ -13,12 +13,12 @@ export default function MyListings() {
     const renderedListings = listings.map((listing, index) => {
         return <ListingCard key={index} listing={listing} editOn={true} />;
     });
-    
+
     if (!loading && renderedListings.length > 0) {
         return (
             <div>
                 <MainTitle>My Listings</MainTitle>
-                <ul className="gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                <ul className="py-6 px-6 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
                     {renderedListings}
                 </ul>
             </div>

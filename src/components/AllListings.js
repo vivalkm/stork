@@ -41,7 +41,7 @@ export default function MyListings() {
             return (
                 <div>
                     <MainTitle>All Listings</MainTitle>
-                    <ul className="gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                    <ul className="gap-2 sm:grid py-6 px-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                         {renderedListings}
                     </ul>
                 </div>
