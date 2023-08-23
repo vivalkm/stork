@@ -1,7 +1,6 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import className from "classnames";
-import { primary_blue } from "../util/colors";
 
 export default function Button({
     children,
@@ -30,12 +29,12 @@ export default function Button({
             "hover:shadow-lg",
             "whitespace-nowrap",
             {
-                [`text-white bg-[${primary_blue}] border-[${primary_blue}] hover:bg-blue-700 active:bg-blue-800`]:
+                "text-white bg-primary-blue border-primary-blue hover:bg-blue-700 active:bg-blue-800":
                     primary,
                 "text-white bg-gray-600 border-gray-600  hover:bg-gray-700 active:bg-gray-800":
                     secondary,
                 "text-white bg-red-600 border-red-600  hover:bg-red-700 active:bg-red-800": danger,
-                [`text-gray-700 bg-transparent border-[${primary_blue}] hover:bg-blue-100 hover:border-blue-400 active:bg-blue-400 active:text-white`]:
+                "text-gray-700 bg-transparent border-primary-blue hover:bg-blue-100 hover:border-blue-400 active:bg-blue-400 active:text-white":
                     outline && primary,
                 "text-gray-700 bg-transparent border-gray-600 hover:bg-gray-100 hover:border-gray-400 active:bg-gray-400 active:text-white":
                     outline && secondary,

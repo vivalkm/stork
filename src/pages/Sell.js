@@ -205,22 +205,20 @@ export default function Sell() {
                     </StandardTextArea>
                 </div>
                 {formData.category === "sale" && (
-                    <div className="mt-6 flex">
-                        <div className="mr-2 w-full">
-                            <label htmlFor="regPrice" className="text-sm font-semibold">
-                                Price
-                            </label>
-                            <StandardInput
-                                type="number"
-                                id="regPrice"
-                                value={regPrice}
-                                onChange={handleOnChange}
-                                textSmall
-                                min="0"
-                                required
-                                rounded
-                            />
-                        </div>
+                    <div className="mt-6">
+                        <label htmlFor="regPrice" className="text-sm font-semibold">
+                            Price ($)
+                        </label>
+                        <StandardInput
+                            type="number"
+                            id="regPrice"
+                            value={regPrice}
+                            onChange={handleOnChange}
+                            textSmall
+                            min="0"
+                            required
+                            rounded
+                        />
                     </div>
                 )}
                 <div className="mt-6">

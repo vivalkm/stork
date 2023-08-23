@@ -8,7 +8,6 @@ import "swiper/css/bundle";
 // import required modules
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectFade, Navigation } from "swiper/modules";
-import { primary_blue } from "../util/colors";
 import { MdLocationOn } from "react-icons/md";
 import { TbCurrencyDollarOff, TbCurrencyDollar } from "react-icons/tb";
 import useAuthContext from "../hooks/useAuthContext";
@@ -87,7 +86,7 @@ export default function Listing() {
                 </div>
                 <div className="grid sm:grid-cols-2 gap-2 mx-auto bg-white md:flex-row max-w-4xl p-4 rounded-b-lg shadow-lg ">
                     <div className="w-full">
-                        <div className={`text-[${primary_blue}] mb-3 font-bold text-2xl`}>
+                        <div className="text-primary-blue mb-3 font-bold text-2xl">
                             {listing.name}
                         </div>
                         <div className="w-full flex mt-6 mb-3 space-x-1">

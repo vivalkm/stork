@@ -1,7 +1,6 @@
 import className from "classnames";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { primary_blue } from "../util/colors";
 
 export default function OptionButton({
     children,
@@ -31,7 +30,7 @@ export default function OptionButton({
                 "shadow-md": shadow,
                 uppercase: uppercase,
                 rounded: rounded,
-                [`bg-[${primary_blue}] border-[${primary_blue} text-white`]: highLight,
+                "bg-primary-blue border-primary-blue text-white": highLight,
             }
         )
     );

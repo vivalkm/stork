@@ -3,7 +3,6 @@ import Moment from "react-moment";
 import { Link, useNavigate } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { primary_blue } from "../util/colors";
 import useMyListingsContext from "../hooks/useMyListingsContext";
 import { toast } from "react-toastify";
 import { TbCurrencyDollar, TbCurrencyDollarOff } from "react-icons/tb";
@@ -42,7 +41,7 @@ export default function ListingCard({ listing, editOn }) {
     }
 
     return (
-        <li className="relative pb-3 bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
+        <li className="relative pb-3 bg-white border flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
             <Link className="contents" to={`/listings/${listing.category}/${listing.id}`}>
                 <div className="h-full w-full flex flex-col justify-center items-center">
                     <img
@@ -52,7 +51,7 @@ export default function ListingCard({ listing, editOn }) {
                         alt="cover"
                     />
                     <Moment
-                        className={`absolute top-2 left-2 bg-[${primary_blue}] rounded-full px-2 py-1 shadow-lg font-semibold text-xs uppercase text-white`}
+                        className="absolute top-2 left-2 bg-primary-blue rounded-full px-2 py-1 shadow-lg font-semibold text-xs uppercase text-white"
                         fromNow
                     >
                         {listing.timestamp?.toDate()}
