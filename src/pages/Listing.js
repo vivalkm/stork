@@ -20,6 +20,8 @@ export default function Listing() {
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(true);
     const [contactSeller, setContactSeller] = useState(false);
+    const [userIsSeller, setUserIsSeller] = useState(false);
+    const { user } = useAuthContext();
 
     useEffect(() => {
         async function fetchListing() {
@@ -28,10 +30,11 @@ export default function Listing() {
             if (docSnap.exists()) {
                 setListing(docSnap.data());
                 setLoading(false);
+                setUserIsSeller(user?.uid === docSnap.data().uid);
             }
         }
         fetchListing();
-    }, [params.listingId]);
+    }, [params.listingId, user?.uid]);
 
     const pagination = {
         clickable: true,
@@ -40,7 +43,7 @@ export default function Listing() {
         },
     };
 
-    const { user } = useAuthContext();
+    
 
     const numToDelimited = (num) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -116,7 +119,7 @@ export default function Listing() {
                                 </div>
                             </div>
                         </div>
-                        {user?.uid !== listing.uid && !contactSeller && (
+                        {!userIsSeller && !contactSeller && (
                             <div>
                                 <Button
                                     primary
@@ -128,7 +131,7 @@ export default function Listing() {
                                 </Button>
                             </div>
                         )}
-                        {user?.uid !== listing.uid && contactSeller && (
+                        {!userIsSeller && contactSeller && (
                             <div>
                                 <Contact listing={listing} />
                             </div>

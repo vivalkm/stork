@@ -19,7 +19,7 @@ export default function AllListings({ count, showMoreEnabled, category }) {
         let q;
         const fetchListings = async () => {
             try {
-                if (!params.category || params.category === "all" || category === "all") {
+                if (params?.category === "all" || category === "all") {
                     q = query(
                         collection(db, "listings"),
                         orderBy("timestamp", "desc"),
@@ -95,9 +95,7 @@ export default function AllListings({ count, showMoreEnabled, category }) {
         return <ListingCard key={listing.id} listing={listing} editOn={false} />;
     });
 
-    if (loading) {
-        return <Spinner />;
-    } else {
+    if (!loading) {
         if (renderedListings.length > 0) {
             return (
                 <div>

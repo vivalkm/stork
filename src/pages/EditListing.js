@@ -39,7 +39,7 @@ export default function EditListing() {
                 const docRef = doc(db, "listings", params.listingId);
                 const docSnap = await getDoc(docRef);
                 if (isMounted && docSnap.exists()) {
-                    setFormData({ ...docSnap.data(), images });
+                    setFormData({ ...docSnap.data() });
                     setLoading(false);
                 }
             } catch (error) {
@@ -50,7 +50,7 @@ export default function EditListing() {
         return () => {
             isMounted = false;
         };
-    }, [images, params]);
+    }, [params]);
 
     const { deleteImages, uid } = useMyListingsContext();
 
@@ -77,7 +77,7 @@ export default function EditListing() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
-        if (images.length + imagesInfo.length > 6) {
+        if (images?.length + imagesInfo?.length > 6) {
             toast.error("Maximum 6 images including existing images are allowed.");
             setLoading(false);
             return;
@@ -87,7 +87,7 @@ export default function EditListing() {
 
             // get the array of image obj {imgName, imgUrl} for all images uploaded
             const uploadedImages =
-                images.length > 0
+                images?.length > 0
                     ? await Promise.all(
                           [...images].map((img) =>
                               storeImage(img).catch((error) => {

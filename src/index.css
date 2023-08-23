@@ -2,13 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    /* background-color: #caf0f8; */
-}
-
 .header {
-    background-color: #209CEE;
-    height: 48px;
+    background-color: #209cee;
 }
 
 .border-dark-blue {
@@ -56,4 +51,8 @@ body {
 .swiper-pagination-bullet-active {
     color: #fff;
     background: #007aff;
+}
+
+html::-webkit-scrollbar {
+    display: none;
 }
