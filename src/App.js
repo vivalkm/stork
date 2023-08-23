@@ -56,8 +56,8 @@ function App() {
                     </Route>
                     <Route path="/listings/:categoryName/:listingId" element={<Listing />} />
                     <Route path="/edit-listing/:listingId" element={<EditListing />} />
-                    <Route path="/all" element={<AllListingPage />} />
-                    <Route path="/free" element={<AllFreeListingPage />} />
+                    <Route path="/listings/all" element={<AllListingPage />} />
+                    <Route path="/listings/free" element={<AllFreeListingPage />} />
                 </Routes>
             </Router>
             <Toast />
