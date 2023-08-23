@@ -30,19 +30,27 @@ export default function EditListing() {
     // track imageInfo for images to be deleted
     const [imagesDeleted, setImagesDeleted] = useState([]);
 
-    // get listing data from firestore
+    // get listing data from firestore based on listingId
     const params = useParams();
     useEffect(() => {
+        let isMounted = true;
         async function fetchListing() {
-            const docRef = doc(db, "listings", params.listingId);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                setFormData({ ...docSnap.data(), images });
-                setLoading(false);
+            try {
+                const docRef = doc(db, "listings", params.listingId);
+                const docSnap = await getDoc(docRef);
+                if (isMounted && docSnap.exists()) {
+                    setFormData({ ...docSnap.data(), images });
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.log(error);
             }
         }
         fetchListing();
-    }, [params.listingId]);
+        return () => {
+            isMounted = false;
+        };
+    }, [images, params]);
 
     const { deleteImages, uid } = useMyListingsContext();
 

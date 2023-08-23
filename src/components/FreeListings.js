@@ -13,6 +13,7 @@ export default function FreeListings({ count, showMoreEnabled }) {
     const incrementalCount = 4;
 
     useEffect(() => {
+        let isMounted = true;
         const fetchListings = async () => {
             try {
                 const q = query(
@@ -26,20 +27,24 @@ export default function FreeListings({ count, showMoreEnabled }) {
                 querySnapshot.forEach((doc) => {
                     newListings.push({ ...doc.data(), id: doc.id });
                 });
-
-                setListings(newListings);
-                setLoading(false);
-                if (querySnapshot.docs.length == defaultCount) {
-                    setLastFetched(querySnapshot.docs[querySnapshot.docs.length - 1]);
-                } else {
-                    setLastFetched(null);
+                if (isMounted) {
+                    setListings(newListings);
+                    setLoading(false);
+                    if (querySnapshot.docs.length === defaultCount) {
+                        setLastFetched(querySnapshot.docs[querySnapshot.docs.length - 1]);
+                    } else {
+                        setLastFetched(null);
+                    }
                 }
             } catch (error) {
                 console.log(error);
             }
         };
         fetchListings();
-    }, []);
+        return () => {
+            isMounted = false;
+        };
+    }, [count]);
 
     const fetchMore = async () => {
         try {
@@ -58,7 +63,7 @@ export default function FreeListings({ count, showMoreEnabled }) {
 
             setListings(newListings);
             setLoading(false);
-            if (querySnapshot.docs.length == incrementalCount) {
+            if (querySnapshot.docs.length === incrementalCount) {
                 setLastFetched(querySnapshot.docs[querySnapshot.docs.length - 1]);
             } else {
                 setLastFetched(null);
