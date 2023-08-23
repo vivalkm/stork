@@ -2,7 +2,6 @@ import { collection, getDocs, orderBy, query, where, limit, startAfter } from "f
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import ListingCard from "./ListingCard";
-import Spinner from "./Spinner";
 import Button from "./Button";
 import { useParams } from "react-router";
 
