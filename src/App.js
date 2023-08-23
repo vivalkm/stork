@@ -11,8 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PrivateRouteLoggedIn from "./components/PrivateRouteLoggedIn";
 import Sell from "./pages/Sell";
 import EditListing from "./pages/EditListing";
-import AllListingPage from "./pages/AllListingPage";
-import AllFreeListingPage from "./pages/AllFreeListingPage";
+import AllItemByCategory from "./pages/AllItemByCategory";
 
 function App() {
     return (
@@ -54,10 +53,9 @@ function App() {
                     >
                         <Route path="/sell" element={<Sell />} />
                     </Route>
-                    <Route path="/listings/:categoryName/:listingId" element={<Listing />} />
+                    <Route path="/listings/:category/:listingId" element={<Listing />} />
                     <Route path="/edit-listing/:listingId" element={<EditListing />} />
-                    <Route path="/listings/all" element={<AllListingPage />} />
-                    <Route path="/listings/free" element={<AllFreeListingPage />} />
+                    <Route path="/listings/:category" element={<AllItemByCategory />} />
                 </Routes>
             </Router>
             <Toast />

@@ -4,24 +4,42 @@ import { db } from "../firebase";
 import ListingCard from "./ListingCard";
 import Spinner from "./Spinner";
 import Button from "./Button";
+import { useParams } from "react-router";
 
-export default function FreeListings({ count, showMoreEnabled }) {
+export default function AllListings({ count, showMoreEnabled, category }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
     const [lastFetched, setLastFetched] = useState(null);
     const defaultCount = 8;
     const incrementalCount = 4;
+    const params = useParams();
 
     useEffect(() => {
         let isMounted = true;
+        let q;
         const fetchListings = async () => {
             try {
-                const q = query(
-                    collection(db, "listings"),
-                    where("category", "==", "free"),
-                    orderBy("timestamp", "desc"),
-                    limit(count ? count : defaultCount)
-                );
+                if (!params.category || params.category === "all" || category === "all") {
+                    q = query(
+                        collection(db, "listings"),
+                        orderBy("timestamp", "desc"),
+                        limit(count ? count : defaultCount)
+                    );
+                } else if (params.category) {
+                    q = query(
+                        collection(db, "listings"),
+                        where("category", "==", params.category),
+                        orderBy("timestamp", "desc"),
+                        limit(count ? count : defaultCount)
+                    );
+                } else {
+                    q = query(
+                        collection(db, "listings"),
+                        where("category", "==", category),
+                        orderBy("timestamp", "desc"),
+                        limit(count ? count : defaultCount)
+                    );
+                }
                 const querySnapshot = await getDocs(q);
                 const newListings = [];
                 querySnapshot.forEach((doc) => {
@@ -44,13 +62,13 @@ export default function FreeListings({ count, showMoreEnabled }) {
         return () => {
             isMounted = false;
         };
-    }, [count]);
+    }, [count, params, category]);
 
     const fetchMore = async () => {
         try {
             const q = query(
                 collection(db, "listings"),
-                where("category", "==", "free"),
+                where("category", "==", params.category),
                 orderBy("timestamp", "desc"),
                 startAfter(lastFetched),
                 limit(4)
@@ -96,7 +114,7 @@ export default function FreeListings({ count, showMoreEnabled }) {
                 </div>
             );
         } else {
-            return <div>There is no recent item to show.</div>;
+            return <div>There is no item to show.</div>;
         }
     }
 }
