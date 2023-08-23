@@ -10,13 +10,16 @@ export default function Map({ listing }) {
     useEffect(() => {
         const getPosition = async () => {
             const url = `https://geocode.maps.co/search?q=${encodeURIComponent(listing.address)}`;
-
             const response = await axios.get(url);
             const pos = response.data[0];
             setPosition([pos?.lat, pos?.lon]);
             setLoading(false);
         };
-        getPosition();
+        try {
+            getPosition();
+        } catch (error) {
+            console.log(error);
+        }
     }, [listing]);
     if (!loading && position && position[0]) {
         return (
