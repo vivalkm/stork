@@ -20,19 +20,23 @@ function MyListingsContextProvider({ children }) {
             if (user) {
                 setUid(user.uid);
                 const fetchCurrentUserListings = async () => {
-                    const q = query(
-                        collection(db, "listings"),
-                        where("uid", "==", user.uid),
-                        orderBy("timestamp", "desc")
-                    );
-                    const querySnapshot = await getDocs(q);
-                    const newListings = [];
-                    querySnapshot.forEach((doc) => {
-                        newListings.push({ ...doc.data(), id: doc.id });
-                    });
+                    try {
+                        const q = query(
+                            collection(db, "listings"),
+                            where("uid", "==", user.uid),
+                            orderBy("timestamp", "desc")
+                        );
+                        const querySnapshot = await getDocs(q);
+                        const newListings = [];
+                        querySnapshot.forEach((doc) => {
+                            newListings.push({ ...doc.data(), id: doc.id });
+                        });
 
-                    setListings(newListings);
-                    setLoading(false);
+                        setListings(newListings);
+                        setLoading(false);
+                    } catch (error) {
+                        console.log(error);
+                    }
                 };
                 fetchCurrentUserListings();
             }

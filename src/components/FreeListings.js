@@ -1,11 +1,11 @@
-import { collection, getDocs, orderBy, query, limit, startAfter } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where, limit, startAfter } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import ListingCard from "./ListingCard";
 import Spinner from "./Spinner";
 import Button from "./Button";
 
-export default function RecentListings({ count, showMoreEnabled }) {
+export default function FreeListings({ count, showMoreEnabled }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
     const [lastFetched, setLastFetched] = useState(null);
@@ -17,6 +17,7 @@ export default function RecentListings({ count, showMoreEnabled }) {
             try {
                 const q = query(
                     collection(db, "listings"),
+                    where("category", "==", "free"),
                     orderBy("timestamp", "desc"),
                     limit(count ? count : defaultCount)
                 );
@@ -44,9 +45,10 @@ export default function RecentListings({ count, showMoreEnabled }) {
         try {
             const q = query(
                 collection(db, "listings"),
+                where("category", "==", "free"),
                 orderBy("timestamp", "desc"),
                 startAfter(lastFetched),
-                limit(incrementalCount)
+                limit(4)
             );
             const querySnapshot = await getDocs(q);
             const newListings = [...listings];
