@@ -12,11 +12,11 @@ export default function Landing() {
             <video src={bgVideo} autoPlay loop playsInline muted></video>
             <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="header-text h-[60%] md:h-[70%]">
-                    <h1 className="mb-3">
+                    <h1>
                         Find the best deals in your neighborhood with Stork
                         <span className="mt-2">Discover Hidden Treasures</span>
                     </h1>
-                    <div className="flex justify-center items-center mt-5">
+                    <div className="flex justify-center items-center">
                         <Button
                             rounded
                             primary

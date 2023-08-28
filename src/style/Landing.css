@@ -23,6 +23,7 @@ video {
     font-size: 1rem;
     text-transform: uppercase;
     line-height: 1;
+    margin-bottom: 1rem;
 }
 .header-text span {
     display: block;
@@ -73,7 +74,6 @@ video {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* align-items: top; */
     margin: auto;
 }
 
@@ -87,6 +87,9 @@ video {
         font-weight: 500;
         font-size: 3rem;
     }
+    .features {
+        flex-direction: row;
+    }
 
     .feature h3 {
         font-size: 20px;
@@ -97,7 +100,7 @@ video {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
     .header-text h1 {
         font-weight: 300;
         font-size: 1.5rem;
@@ -106,14 +109,28 @@ video {
         font-weight: 600;
         font-size: 3rem;
     }
-    .features {
-        flex-direction: row;
-    }
+
     .feature h3 {
         font-size: 24px;
     }
 
     .feature p {
         font-size: 20px;
+    }
+}
+
+@media (max-height: 400px) {
+    .features {
+        flex-direction: row;
+    }
+
+    .header-text h1 {
+        font-weight: 100;
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+    .header-text span {
+        font-weight: 300;
+        font-size: 2rem;
     }
 }
