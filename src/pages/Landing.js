@@ -32,15 +32,11 @@ export default function Landing() {
                     <section id="features" className="features">
                         <div className="feature">
                             <h3>Local Listings</h3>
-                            <p>
-                                Discover yard sales happening near you and explore items for sale
-                            </p>
+                            <p>Discover yard sales happening near you and explore items for sale</p>
                         </div>
                         <div className="feature">
                             <h3>Easy Posting</h3>
-                            <p>
-                                List your own yard sale items quickly and easily
-                            </p>
+                            <p>List your own yard sale items quickly and easily</p>
                         </div>
                         <div className="feature">
                             <h3>Interactive Map</h3>
