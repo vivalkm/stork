@@ -21,13 +21,13 @@ export default function Header() {
                         className="cursor-pointer ml-2 header-logo hidden md:inline-block"
                         src={logo}
                         alt="logo"
-                        onClick={() => navigate("/home")}
+                        onClick={() => navigate("/")}
                     />
                     <img
                         className="cursor-pointer ml-2 header-logo hidden sm:inline-block md:hidden"
                         src={logo_sq}
                         alt="logo_sq"
-                        onClick={() => navigate("/home")}
+                        onClick={() => navigate("/")}
                     />
                 </div>
                 <div className="ml-2 mr-2 w-[60%]">
