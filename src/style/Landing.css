@@ -87,9 +87,7 @@ video {
         font-weight: 500;
         font-size: 3rem;
     }
-    .features {
-        flex-direction: row;
-    }
+
     .feature h3 {
         font-size: 20px;
     }
@@ -107,6 +105,9 @@ video {
     .header-text span {
         font-weight: 600;
         font-size: 3rem;
+    }
+    .features {
+        flex-direction: row;
     }
     .feature h3 {
         font-size: 24px;
