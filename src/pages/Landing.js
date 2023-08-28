@@ -11,7 +11,7 @@ export default function Landing() {
         <div>
             <video src={bgVideo} autoPlay loop playsInline muted></video>
             <div>
-                <div className="header-text">
+                <div className="header-text absolute top-[30%] left-0 right-0 sm:top-[20%]">
                     <h1 className="mb-5">
                         Find the best deals in your neighborhood with Stork
                         <span>Discover Hidden Treasures</span>
@@ -28,7 +28,7 @@ export default function Landing() {
                         </Button>
                     </div>
                 </div>
-                <div className="description">
+                <div className="description sm:absolute sm:bottom-0 sm:left-0 sm:right-0">
                     <section id="features" className="features">
                         <div className="feature">
                             <h3>Local Listings</h3>
