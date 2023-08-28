@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import useAuthContext from "../hooks/useAuthContext";
 import StandardInput from "../components/StandardInput";
 import MyListings from "../components/MyListings";
+import { defaultAvatar } from "../util/publicResources";
 
 export default function Profile() {
     const [isOnEdit, setIsOnEdit] = useState(false);
@@ -17,9 +18,10 @@ export default function Profile() {
     const [profileData, setProfileData] = useState({
         name: auth.currentUser.displayName,
         email: auth.currentUser.email,
+        photoURL: auth.currentUser.photoURL,
     });
 
-    const { name, email } = profileData;
+    const { name, email, photoURL } = profileData;
     const navigate = useNavigate();
     const handleOnEdit = () => {
         setIsOnEdit(true);
@@ -42,10 +44,10 @@ export default function Profile() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            updateProfile(auth.currentUser, { displayName: name });
+            updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL });
             setIsOnEdit(false);
-            const docRef = doc(db, "users", auth.currentUser.uid);
-            await updateDoc(docRef, { name });
+            const profileRef = doc(db, "users", auth.currentUser.uid);
+            await updateDoc(profileRef, { name, photoURL });
             toast.success("Profile updated!");
         } catch (error) {
             toast.error(error.message);
@@ -56,7 +58,9 @@ export default function Profile() {
         setProfileData({
             name: auth.currentUser.displayName,
             email: auth.currentUser.email,
+            photoURL: auth.currentUser.photoURL,
         });
+        console.log(auth.currentUser);
         setIsOnEdit(false);
     };
 
@@ -66,6 +70,27 @@ export default function Profile() {
             <div className="flex justify-center flex-wrap items-center px-6 py-6 max-w-6xl mx-auto">
                 <div className="w-full sm:w-[70%] md:w-[70%] lg:w-[45%]">
                     <form onSubmit={handleFormSubmit}>
+                        <div className="mb-6 h-14 flex justify-center">
+                            <img
+                                src={photoURL ? photoURL : defaultAvatar}
+                                className="h-full aspect-square rounded-full border-gray-200 border-4"
+                                alt="avatar"
+                            />
+                        </div>
+                        <div className="mb-6" hidden={!isOnEdit}>
+                            <label htmlFor="photoURL" className="text-sm font-semibold">
+                                Avatar URL
+                            </label>
+                            <StandardInput
+                                rounded
+                                type="text"
+                                id="photoURL"
+                                maxLength={500}
+                                value={photoURL}
+                                disabled={!isOnEdit}
+                                onChange={handleOnChange}
+                            />
+                        </div>
                         <div className="mb-6">
                             <label htmlFor="name" className="text-sm font-semibold">
                                 Name

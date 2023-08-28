@@ -2,19 +2,19 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { db } from "../firebase";
-// Import Swiper styles
-import "swiper/css/bundle";
-
-// import required modules
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, EffectFade, Navigation } from "swiper/modules";
 import { MdLocationOn } from "react-icons/md";
 import { TbCurrencyDollarOff, TbCurrencyDollar } from "react-icons/tb";
 import useAuthContext from "../hooks/useAuthContext";
 import Button from "../components/Button";
 import Contact from "../components/Contact";
 import Map from "../components/Map";
-import { toTitleCase } from "../util/text";
+import { numToDelimited, toTitleCase } from "../util/text";
+import { defaultAvatar } from "../util/publicResources";
+
+// import required modules and styels for using swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay, EffectFade, Navigation } from "swiper/modules";
+import "swiper/css/bundle";
 
 export default function Listing() {
     const params = useParams();
@@ -23,8 +23,10 @@ export default function Listing() {
     const [contactSeller, setContactSeller] = useState(false);
     const [userIsSeller, setUserIsSeller] = useState(false);
     const { user } = useAuthContext();
+    const [avatarURL, setAvatarURL] = useState(defaultAvatar);
 
     useEffect(() => {
+        // get listing data based on listing id in params
         async function fetchListing() {
             const docRef = doc(db, "listings", params.listingId);
             const docSnap = await getDoc(docRef);
@@ -35,19 +37,25 @@ export default function Listing() {
             }
         }
         fetchListing();
-    }, [params.listingId, user?.uid]);
+
+        // get avatar url for the user who creates the giving listing
+        const fetchAvatar = async () => {
+            if (!loading) {
+                const docRef = doc(db, "users", listing.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists() && docSnap.data().photoURL) {
+                    setAvatarURL(docSnap.data().photoURL);
+                }
+            }
+        };
+        fetchAvatar();
+    }, [params.listingId, user?.uid, loading]);
 
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
             return '<span class="' + className + '"></span>';
         },
-    };
-
-    
-
-    const numToDelimited = (num) => {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     if (loading) {
@@ -95,9 +103,7 @@ export default function Listing() {
                         </div>
                         <div className="w-full flex mt-6 mb-3 space-x-1">
                             <MdLocationOn className="h-6 w-6 text-green-600" />
-                            <p className="font-semibold text-md text-gray-600">
-                                {listing.address}
-                            </p>
+                            <p className="font-semibold text-md text-gray-600">{listing.address}</p>
                         </div>
                         <div className="mt-3 mb-3">
                             <span className="font-semibold">Description: </span>
@@ -109,18 +115,23 @@ export default function Listing() {
                                 {numToDelimited(listing.regPrice)}
                             </div>
                         )}
-                        <div className="flex font-semibold mt-3 mb-3">
+                        <div className="flex justify-between font-semibold mt-3 mb-3 h-8">
                             <div className="bg-gray-200 rounded-full flex px-2 py-1 items-center">
                                 {listing.category === "free" && (
-                                    <TbCurrencyDollarOff className="h-4 w-4" />
+                                    <TbCurrencyDollarOff className="h-full" />
                                 )}
                                 {listing.category === "sale" && (
-                                    <TbCurrencyDollar className="h-4 w-4" />
+                                    <TbCurrencyDollar className="h-full" />
                                 )}
                                 <div className="capitalize text-sm font-bold">
                                     {listing.category}
                                 </div>
                             </div>
+                            <img
+                                className="h-full aspect-square rounded-full border-gray-200 border-4"
+                                src={avatarURL}
+                                alt="avatar"
+                            />
                         </div>
                         {!userIsSeller && !contactSeller && (
                             <div>

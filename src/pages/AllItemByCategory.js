@@ -3,7 +3,7 @@ import AllListings from "../components/AllListings";
 import { useParams } from "react-router";
 import MainTitle from "../components/MainTitle";
 
-export default function AllItemByCategory({}) {
+export default function AllItemByCategory() {
     const params = useParams();
     return (
         <div>
