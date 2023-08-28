@@ -70,7 +70,7 @@ export default function Profile() {
             <div className="flex justify-center flex-wrap items-center px-6 py-6 max-w-6xl mx-auto">
                 <div className="w-full sm:w-[70%] md:w-[70%] lg:w-[45%]">
                     <form onSubmit={handleFormSubmit}>
-                        <div className="mb-6 h-14 flex justify-center">
+                        <div className="mb-6 h-[5rem] flex justify-center">
                             <img
                                 src={photoURL ? photoURL : defaultAvatar}
                                 className="h-full aspect-square rounded-full border-gray-200 border-4"

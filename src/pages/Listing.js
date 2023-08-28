@@ -115,7 +115,7 @@ export default function Listing() {
                                 {numToDelimited(listing.regPrice)}
                             </div>
                         )}
-                        <div className="flex justify-between font-semibold mt-3 mb-3 h-8">
+                        <div className="flex justify-between font-semibold mt-3 mb-3 h-10">
                             <div className="bg-gray-200 rounded-full flex px-2 py-1 items-center">
                                 {listing.category === "free" && (
                                     <TbCurrencyDollarOff className="h-full" />
