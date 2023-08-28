@@ -27,7 +27,7 @@ export default function Home() {
                             </span>
                         </Link>
                     </div>
-                    <AllListings count={4} showMoreEnabled={false} category={"sale"} />
+                    <AllListings count={4} showMoreEnabled={false}/>
                 </div>
                 <div>
                     <MainTitle>Items for free</MainTitle>
@@ -39,7 +39,7 @@ export default function Home() {
                         </Link>
                     </div>
                 </div>
-                <AllListings count={4} showMoreEnabled={false} category={"free"} />
+                <AllListings count={4} showMoreEnabled={false}/>
             </div>
         </div>
     );

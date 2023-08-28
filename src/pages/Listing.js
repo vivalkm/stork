@@ -14,6 +14,7 @@ import useAuthContext from "../hooks/useAuthContext";
 import Button from "../components/Button";
 import Contact from "../components/Contact";
 import Map from "../components/Map";
+import { toTitleCase } from "../util/text";
 
 export default function Listing() {
     const params = useParams();
@@ -90,11 +91,13 @@ export default function Listing() {
                 <div className="grid sm:grid-cols-2 gap-2 mx-auto bg-white md:flex-row max-w-4xl p-4 rounded-b-lg shadow-lg ">
                     <div className="w-full">
                         <div className="text-primary-blue mb-3 font-bold text-2xl">
-                            {listing.name}
+                            {toTitleCase(listing.name)}
                         </div>
                         <div className="w-full flex mt-6 mb-3 space-x-1">
                             <MdLocationOn className="h-6 w-6 text-green-600" />
-                            <p className="font-semibold text-md text-gray-600">{listing.address}</p>
+                            <p className="font-semibold text-md text-gray-600">
+                                {listing.address}
+                            </p>
                         </div>
                         <div className="mt-3 mb-3">
                             <span className="font-semibold">Description - </span>

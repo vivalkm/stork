@@ -56,6 +56,7 @@ function App() {
                     <Route path="/listings/:category/:listingId" element={<Listing />} />
                     <Route path="/edit-listing/:listingId" element={<EditListing />} />
                     <Route path="/listings/:category" element={<AllItemByCategory />} />
+                    <Route path="/search/:item" element={<AllItemByCategory />} />
                 </Routes>
             </Router>
             <Toast />

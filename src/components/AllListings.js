@@ -5,40 +5,30 @@ import ListingCard from "./ListingCard";
 import Button from "./Button";
 import { useParams } from "react-router";
 
-export default function AllListings({ count, showMoreEnabled, category }) {
+export default function AllListings({ count, showMoreEnabled }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
     const [lastFetched, setLastFetched] = useState(null);
     const defaultCount = 8;
     const incrementalCount = 4;
     const params = useParams();
+    const queryConstraints = [];
+    if (params.item) queryConstraints.push(where("name", "==", params.item));
+    if (params.category && params.category !== "all") {
+        queryConstraints.push(where("category", "==", params.category));
+    }
 
     useEffect(() => {
         let isMounted = true;
         let q;
         const fetchListings = async () => {
             try {
-                if (params?.category === "all" || category === "all") {
-                    q = query(
-                        collection(db, "listings"),
-                        orderBy("timestamp", "desc"),
-                        limit(count ? count : defaultCount)
-                    );
-                } else if (params.category) {
-                    q = query(
-                        collection(db, "listings"),
-                        where("category", "==", params.category),
-                        orderBy("timestamp", "desc"),
-                        limit(count ? count : defaultCount)
-                    );
-                } else {
-                    q = query(
-                        collection(db, "listings"),
-                        where("category", "==", category),
-                        orderBy("timestamp", "desc"),
-                        limit(count ? count : defaultCount)
-                    );
-                }
+                q = query(
+                    collection(db, "listings"),
+                    ...queryConstraints,
+                    orderBy("timestamp", "desc"),
+                    limit(count ? count : defaultCount)
+                );
                 const querySnapshot = await getDocs(q);
                 const newListings = [];
                 querySnapshot.forEach((doc) => {
@@ -61,16 +51,16 @@ export default function AllListings({ count, showMoreEnabled, category }) {
         return () => {
             isMounted = false;
         };
-    }, [count, params, category]);
+    }, [count, params]);
 
     const fetchMore = async () => {
         try {
             const q = query(
                 collection(db, "listings"),
-                where("category", "==", params.category),
+                ...queryConstraints,
                 orderBy("timestamp", "desc"),
                 startAfter(lastFetched),
-                limit(4)
+                limit(count ? count : defaultCount)
             );
             const querySnapshot = await getDocs(q);
             const newListings = [...listings];

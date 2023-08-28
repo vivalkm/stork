@@ -2,6 +2,8 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 import logo from "../assets/logo.png";
+import logo_sq from "../assets/logo_sq.png";
+import Search from "./Search";
 
 export default function Header() {
     const location = useLocation();
@@ -16,11 +18,20 @@ export default function Header() {
             <header className="flex justify-between items-center">
                 <div>
                     <img
-                        className="cursor-pointer ml-2 header-logo"
+                        className="cursor-pointer ml-2 header-logo hidden md:inline-block"
                         src={logo}
                         alt="logo"
                         onClick={() => navigate("/")}
                     />
+                    <img
+                        className="cursor-pointer ml-2 header-logo hidden sm:inline-block md:hidden"
+                        src={logo_sq}
+                        alt="logo_sq"
+                        onClick={() => navigate("/")}
+                    />
+                </div>
+                <div className="ml-2 mr-2 w-[60%]">
+                    <Search />
                 </div>
                 <div className="mr-2 whitespace-nowrap">
                     <ul className="flex space-x-2 md:space-x-5 lg:space-x-10">

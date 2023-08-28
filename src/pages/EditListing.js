@@ -12,6 +12,7 @@ import { auth, db } from "../firebase";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router";
 import useMyListingsContext from "../hooks/useMyListingsContext";
+import { toTitleCase } from "../util/text";
 
 export default function EditListing() {
     const navigate = useNavigate();
@@ -102,6 +103,7 @@ export default function EditListing() {
             // update record in firestore
             const formDataCopy = {
                 ...formData,
+                name: formData.name.toLowerCase(),
                 imagesInfo: [...imagesInfo, ...uploadedImages],
                 timestamp: serverTimestamp(),
             };
@@ -244,7 +246,7 @@ export default function EditListing() {
                         </label>
                         <StandardInput
                             id="name"
-                            value={name}
+                            value={toTitleCase(name)}
                             onChange={handleOnChange}
                             maxLength="32"
                             minLength="5"

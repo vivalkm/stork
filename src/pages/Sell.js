@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { toTitleCase } from "../util/text";
 
 export default function Sell() {
     const [loading, setLoading] = useState(false);
@@ -62,6 +63,7 @@ export default function Sell() {
             // upload list info to firestore
             const formDataCopy = {
                 ...formData,
+                name: formData.name.toLowerCase(),
                 imagesInfo: uploadedImages,
                 images,
                 uid: auth.currentUser.uid,
@@ -165,7 +167,7 @@ export default function Sell() {
                     </label>
                     <StandardInput
                         id="name"
-                        value={name}
+                        value={toTitleCase(name)}
                         onChange={handleOnChange}
                         maxLength="32"
                         minLength="5"

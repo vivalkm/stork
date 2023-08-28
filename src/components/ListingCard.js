@@ -6,6 +6,7 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import useMyListingsContext from "../hooks/useMyListingsContext";
 import { toast } from "react-toastify";
 import { TbCurrencyDollar, TbCurrencyDollarOff } from "react-icons/tb";
+import { toTitleCase } from "../util/text";
 
 export default function ListingCard({ listing, editOn }) {
     const numToDelimited = (num) => {
@@ -62,7 +63,7 @@ export default function ListingCard({ listing, editOn }) {
                             {listing.address}
                         </p>
                     </div>
-                    <div className="font-semibold text-xl truncate">{listing.name}</div>
+                    <div className="font-semibold text-xl truncate">{toTitleCase(listing.name)}</div>
 
                     <p className="font-semibold text-gray-700 text-sm">
                         ${listing.category !== "free" ? numToDelimited(listing.regPrice) : "0"}
