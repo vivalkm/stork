@@ -1,38 +1,3 @@
-/* Feature section styles */
-.features {
-    display: flex;
-    justify-content: space-around;
-    padding: 80px;
-}
-
-.feature {
-    text-align: center;
-}
-
-.feature h3 {
-    margin-top: 20px;
-    font-size: 24px;
-    color: white;
-}
-
-.feature p {
-    margin-top: 10px;
-    color: white;
-}
-
-/* Media queries for responsive design */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        padding: 40px;
-    }
-
-    .features {
-        flex-direction: column;
-        padding: 40px;
-    }
-}
-
 html,
 body {
     font-family: "Raleway", sans-serif;
@@ -40,11 +5,12 @@ body {
 video {
     background-color: hsl(181deg 50% 20% / 60%);
     width: 100dvw;
-    min-height: 100dvh;
+    height: 100%;
+    /* min-height: 100dvh; */
     position: absolute;
     top: 0;
     left: 0;
-    object-fit: cover;
+    object-fit: fill;
 }
 .header-text {
     color: white;
@@ -54,15 +20,15 @@ video {
     text-align: center;
 }
 .header-text h1 {
-    font-weight: 200;
+    font-weight: 100;
     font-size: 1rem;
     text-transform: uppercase;
     line-height: 1;
 }
 .header-text span {
     display: block;
-    font-weight: 900;
-    font-size: 3rem;
+    font-weight: 300;
+    font-size: 2rem;
 }
 .description {
     margin: auto;
@@ -70,7 +36,7 @@ video {
     background-color: hsl(181deg 50% 20% / 70%);
 }
 .description p {
-    max-width: 40rem;
+    /* max-width: 40rem; */
     margin-inline: auto;
     line-height: 1.6;
 }
@@ -78,4 +44,76 @@ video {
     text-align: center;
     font-size: 0.5rem;
     color: rgba(156, 163, 175, 0.5);
+}
+
+/* Feature section styles */
+.feature {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.feature h3 {
+    font-weight: 600;
+    color: white;
+    font-size: 15px;
+}
+
+.feature p {
+    margin-top: 5px;
+    color: white;
+    font-size: 12px;
+    width: 90%;
+}
+
+.features {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: top; */
+    margin: auto;
+}
+
+/* Media queries for responsive design */
+@media (min-width: 400px) {
+    .header-text h1 {
+        font-weight: 200;
+        font-size: 1rem;
+    }
+    .header-text span {
+        font-weight: 500;
+        font-size: 3rem;
+    }
+    .features {
+        flex-direction: row;
+    }
+    .feature h3 {
+        font-size: 20px;
+    }
+
+    .feature p {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .header-text h1 {
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+    .header-text span {
+        font-weight: 600;
+        font-size: 3rem;
+    }
+    .feature h3 {
+        font-size: 24px;
+    }
+
+    .feature p {
+        font-size: 20px;
+    }
 }
