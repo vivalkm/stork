@@ -5,6 +5,7 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
 import MainTitle from "../components/MainTitle";
 import StandardInput from "../components/StandardInput";
+import Header from "../components/Header";
 
 export default function ForgotPassword() {
     const [formData, setFormData] = useState({
@@ -34,6 +35,7 @@ export default function ForgotPassword() {
 
     return (
         <div>
+            <Header />
             <MainTitle>Forgot Password</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="w-full md:w-[50%] lg:w-[40%]">

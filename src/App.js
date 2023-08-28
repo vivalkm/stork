@@ -4,7 +4,6 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import ForgotPassword from "./pages/ForgotPassword";
-import Header from "./components/Header";
 import Listing from "./pages/Listing";
 import Toast from "./components/Toast";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,7 +17,7 @@ function App() {
     return (
         <div>
             <Router>
-                <Header />
+                
                 <Routes>
                     <Route path="/" element={<Landing />} />
                     <Route path="/home" element={<Home />} />

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .header {
-    background-color: #209cee;
+    background-color: #194C4D;
 }
 
 .border-dark-blue {
@@ -50,7 +50,7 @@
 
 .swiper-pagination-bullet-active {
     color: #fff;
-    background: #007aff;
+    background: #194C4D;
 }
 
 html::-webkit-scrollbar {

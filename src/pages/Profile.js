@@ -10,6 +10,7 @@ import useAuthContext from "../hooks/useAuthContext";
 import StandardInput from "../components/StandardInput";
 import MyListings from "../components/MyListings";
 import { defaultAvatar } from "../util/publicResources";
+import Header from "../components/Header";
 
 export default function Profile() {
     const [isOnEdit, setIsOnEdit] = useState(false);
@@ -66,6 +67,7 @@ export default function Profile() {
 
     return (
         <div>
+            <Header />
             <MainTitle>Profile</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-6 max-w-6xl mx-auto">
                 <div className="w-full sm:w-[70%] md:w-[70%] lg:w-[45%]">

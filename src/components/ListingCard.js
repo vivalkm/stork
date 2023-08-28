@@ -64,7 +64,7 @@ export default function ListingCard({ listing, editOn }) {
                         alt="cover"
                     />
                     <Moment
-                        className="absolute top-2 left-2 bg-primary-blue rounded-full px-2 py-1 shadow-lg font-semibold text-xs uppercase text-white"
+                        className="absolute top-2 left-2 bg-primary-green opacity-80 rounded-full px-2 py-1 shadow-lg font-semibold text-xs uppercase text-white"
                         fromNow
                     >
                         {listing.timestamp?.toDate()}

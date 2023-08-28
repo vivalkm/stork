@@ -10,6 +10,7 @@ import { FirebaseError } from "firebase/app";
 import signInWithGoogle from "../util/signInWithGoogle";
 import MainTitle from "../components/MainTitle";
 import StandardInput from "../components/StandardInput";
+import Header from "../components/Header";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -57,6 +58,7 @@ export default function SignIn() {
 
     return (
         <div>
+            <Header />
             <MainTitle>Sign In</MainTitle>
             <div className="flex justify-center flex-wrap items-center px-6 py-6 max-w-6xl mx-auto">
                 <div className="w-full sm:w-[65%] md:w-[70%] lg:w-[40%]">

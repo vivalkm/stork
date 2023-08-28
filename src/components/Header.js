@@ -12,7 +12,6 @@ export default function Header() {
         return location.pathname === route;
     }
     const { loggedIn } = useAuthContext();
-
     return (
         <div className="shadow-sm sticky top-0 z-40 header">
             <header className="flex justify-between items-center">

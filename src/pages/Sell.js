@@ -12,6 +12,7 @@ import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { toTitleCase } from "../util/text";
+import Header from "../components/Header";
 
 export default function Sell() {
     const [loading, setLoading] = useState(false);
@@ -131,123 +132,126 @@ export default function Sell() {
     }
 
     return (
-        <div className="max-w-md px-2 mx-auto">
-            <MainTitle>List An Item</MainTitle>
-            <form onSubmit={handleFormSubmit} className="mt-6">
-                <label className="text-sm mt-6 font-semibold">For Sale / For Free</label>
-                <div className="flex">
-                    <div className="w-full mr-2">
-                        <OptionButton
-                            type="button"
-                            id="category"
-                            value="sale"
-                            rounded
-                            onClick={handleOnClick}
-                            highLight={formData.category === "sale"}
-                        >
-                            Sale
-                        </OptionButton>
+        <div>
+            <Header />
+            <div className="max-w-md px-2 mx-auto">
+                <MainTitle>List An Item</MainTitle>
+                <form onSubmit={handleFormSubmit} className="mt-6">
+                    <label className="text-sm mt-6 font-semibold">For Sale / For Free</label>
+                    <div className="flex">
+                        <div className="w-full mr-2">
+                            <OptionButton
+                                type="button"
+                                id="category"
+                                value="sale"
+                                rounded
+                                onClick={handleOnClick}
+                                highLight={formData.category === "sale"}
+                            >
+                                Sale
+                            </OptionButton>
+                        </div>
+                        <div className="w-full ml-2">
+                            <OptionButton
+                                type="button"
+                                id="category"
+                                value="free"
+                                rounded
+                                onClick={handleOnClick}
+                                highLight={formData.category === "free"}
+                            >
+                                Free
+                            </OptionButton>
+                        </div>
                     </div>
-                    <div className="w-full ml-2">
-                        <OptionButton
-                            type="button"
-                            id="category"
-                            value="free"
-                            rounded
-                            onClick={handleOnClick}
-                            highLight={formData.category === "free"}
-                        >
-                            Free
-                        </OptionButton>
-                    </div>
-                </div>
-                <div className="mt-6">
-                    <label htmlFor="name" className="text-sm mt-6 font-semibold">
-                        Name
-                    </label>
-                    <StandardInput
-                        id="name"
-                        value={toTitleCase(name)}
-                        onChange={handleOnChange}
-                        maxLength="32"
-                        minLength="4"
-                        textSmall
-                        required
-                        rounded
-                    />
-                </div>
-                <div className="mt-6">
-                    <label htmlFor="address" className="text-sm font-semibold">
-                        Address
-                    </label>
-                    <StandardInput
-                        id="address"
-                        value={address}
-                        onChange={handleOnChange}
-                        maxLength="100"
-                        minLength="5"
-                        textSmall
-                        rounded
-                    />
-                </div>
-                <div className="mt-6">
-                    <label htmlFor="description" className="text-sm font-semibold">
-                        Description
-                    </label>
-                    <StandardTextArea
-                        id="description"
-                        value={description}
-                        onChange={handleOnChange}
-                        maxLength="1000"
-                        textSmall
-                        rows="3"
-                        rounded
-                    >
-                        Description
-                    </StandardTextArea>
-                </div>
-                {formData.category === "sale" && (
                     <div className="mt-6">
-                        <label htmlFor="regPrice" className="text-sm font-semibold">
-                            Price ($)
+                        <label htmlFor="name" className="text-sm mt-6 font-semibold">
+                            Name
                         </label>
                         <StandardInput
-                            type="number"
-                            id="regPrice"
-                            value={regPrice}
+                            id="name"
+                            value={toTitleCase(name)}
                             onChange={handleOnChange}
+                            maxLength="32"
+                            minLength="4"
                             textSmall
-                            min="0"
                             required
                             rounded
                         />
                     </div>
-                )}
-                <div className="mt-6">
-                    <label htmlFor="images" className="text-sm font-semibold">
-                        Images
-                    </label>
-                    <StandardInput
-                        id="images"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleOnChange}
-                        maxLength="1000"
-                        textSmall
-                        rows="3"
-                        multiple
-                        required
-                        rounded
-                        border
-                    ></StandardInput>
-                </div>
-                <div className="mt-6">
-                    <Button primary uppercase rounded shadow>
-                        Create
-                    </Button>
-                </div>
-            </form>
-            <div className="mb-6 "></div>
+                    <div className="mt-6">
+                        <label htmlFor="address" className="text-sm font-semibold">
+                            Address
+                        </label>
+                        <StandardInput
+                            id="address"
+                            value={address}
+                            onChange={handleOnChange}
+                            maxLength="100"
+                            minLength="5"
+                            textSmall
+                            rounded
+                        />
+                    </div>
+                    <div className="mt-6">
+                        <label htmlFor="description" className="text-sm font-semibold">
+                            Description
+                        </label>
+                        <StandardTextArea
+                            id="description"
+                            value={description}
+                            onChange={handleOnChange}
+                            maxLength="1000"
+                            textSmall
+                            rows="3"
+                            rounded
+                        >
+                            Description
+                        </StandardTextArea>
+                    </div>
+                    {formData.category === "sale" && (
+                        <div className="mt-6">
+                            <label htmlFor="regPrice" className="text-sm font-semibold">
+                                Price ($)
+                            </label>
+                            <StandardInput
+                                type="number"
+                                id="regPrice"
+                                value={regPrice}
+                                onChange={handleOnChange}
+                                textSmall
+                                min="0"
+                                required
+                                rounded
+                            />
+                        </div>
+                    )}
+                    <div className="mt-6">
+                        <label htmlFor="images" className="text-sm font-semibold">
+                            Images
+                        </label>
+                        <StandardInput
+                            id="images"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleOnChange}
+                            maxLength="1000"
+                            textSmall
+                            rows="3"
+                            multiple
+                            required
+                            rounded
+                            border
+                        ></StandardInput>
+                    </div>
+                    <div className="mt-6">
+                        <Button primary uppercase rounded shadow>
+                            Create
+                        </Button>
+                    </div>
+                </form>
+                <div className="mb-6 "></div>
+            </div>
         </div>
     );
 }

@@ -13,6 +13,7 @@ import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router";
 import useMyListingsContext from "../hooks/useMyListingsContext";
 import { toTitleCase } from "../util/text";
+import Header from "../components/Header";
 
 export default function EditListing() {
     const navigate = useNavigate();
@@ -211,6 +212,7 @@ export default function EditListing() {
 
         return (
             <div className="max-w-md px-2 mx-auto">
+                <Header />
                 <MainTitle>Edit Listing</MainTitle>
                 <form onSubmit={handleFormSubmit} className="mt-6">
                     <label className="text-sm mt-6 font-semibold">For Sale / For Free</label>

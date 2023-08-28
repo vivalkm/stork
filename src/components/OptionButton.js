@@ -30,7 +30,7 @@ export default function OptionButton({
                 "shadow-md": shadow,
                 uppercase: uppercase,
                 rounded: rounded,
-                "bg-primary-blue border-primary-blue text-white": highLight,
+                "bg-primary-green border-primary-green text-white": highLight,
             }
         )
     );

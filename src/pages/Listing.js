@@ -15,6 +15,7 @@ import { defaultAvatar } from "../util/publicResources";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css/bundle";
+import Header from "../components/Header";
 
 export default function Listing() {
     const params = useParams();
@@ -77,6 +78,7 @@ export default function Listing() {
 
         return (
             <div>
+                <Header />
                 <div className="flex justify-center flex-wrap items-center max-w-4xl mx-auto rounded-t-lg shadow-lg">
                     <div className="w-full">
                         <Swiper
@@ -104,7 +106,7 @@ export default function Listing() {
                                 src={avatarURL}
                                 alt="avatar"
                             />
-                            <div className="text-primary-blue mb-3 font-bold text-2xl">
+                            <div className="text-primary-green mb-3 font-bold text-2xl">
                                 {toTitleCase(listing.name)}
                             </div>
                         </div>
