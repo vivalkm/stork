@@ -14,7 +14,7 @@ export default function Header() {
     const { loggedIn } = useAuthContext();
 
     return (
-        <div className="border-b shadow-sm sticky top-0 z-40 header">
+        <div className="shadow-sm sticky top-0 z-40 header">
             <header className="flex justify-between items-center">
                 <div>
                     <img
