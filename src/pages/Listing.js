@@ -96,10 +96,17 @@ export default function Listing() {
                         </Swiper>
                     </div>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-2 mx-auto bg-white md:flex-row max-w-4xl p-4 rounded-b-lg shadow-lg ">
+                <div className="md:grid md:grid-cols-2 md:gap-2 mx-auto bg-white max-w-4xl p-4 rounded-b-lg shadow-lg">
                     <div className="w-full">
-                        <div className="text-primary-blue mb-3 font-bold text-2xl">
-                            {toTitleCase(listing.name)}
+                        <div className="h-10 flex">
+                            <img
+                                className="h-full aspect-square rounded-full border-gray-200 border-4 mr-2"
+                                src={avatarURL}
+                                alt="avatar"
+                            />
+                            <div className="text-primary-blue mb-3 font-bold text-2xl">
+                                {toTitleCase(listing.name)}
+                            </div>
                         </div>
                         <div className="w-full flex mt-6 mb-3 space-x-1">
                             <MdLocationOn className="h-6 w-6 text-green-600" />
@@ -127,11 +134,6 @@ export default function Listing() {
                                     {listing.category}
                                 </div>
                             </div>
-                            <img
-                                className="h-full aspect-square rounded-full border-gray-200 border-4"
-                                src={avatarURL}
-                                alt="avatar"
-                            />
                         </div>
                         {!userIsSeller && !contactSeller && (
                             <div>
@@ -151,7 +153,7 @@ export default function Listing() {
                             </div>
                         )}
                     </div>
-                    <div className="bg-gray-200 w-full z-10 rounded">
+                    <div className="bg-gray-200 w-full h-[300px] md:h-full rounded">
                         <Map listing={listing} />
                     </div>
                 </div>
