@@ -5,7 +5,7 @@ import ListingCard from "./ListingCard";
 import Button from "./Button";
 import { useParams } from "react-router";
 
-export default function AllListings({ count, showMoreEnabled }) {
+export default function AllListings({ count, showMoreEnabled, category }) {
     const [loading, setLoading] = useState(true);
     const [listings, setListings] = useState([]);
     const [lastFetched, setLastFetched] = useState(null);
@@ -16,6 +16,8 @@ export default function AllListings({ count, showMoreEnabled }) {
     if (params.item) queryConstraints.push(where("name", "==", params.item));
     if (params.category && params.category !== "all") {
         queryConstraints.push(where("category", "==", params.category));
+    } else if (category) {
+        queryConstraints.push(where("category", "==", category));
     }
 
     useEffect(() => {
