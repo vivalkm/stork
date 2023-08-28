@@ -170,7 +170,7 @@ export default function Sell() {
                         value={toTitleCase(name)}
                         onChange={handleOnChange}
                         maxLength="32"
-                        minLength="5"
+                        minLength="4"
                         textSmall
                         required
                         rounded

@@ -46,7 +46,7 @@ export default function ListingCard({ listing, editOn }) {
             <Link className="contents" to={`/listings/${listing.category}/${listing.id}`}>
                 <div className="h-full w-full flex flex-col justify-center items-center">
                     <img
-                        className="w-full h-[170px] object-scale-down hover:scale-105 transition-scale duration-200 ease-in"
+                        className="w-full mt-2 h-[170px] object-scale-down hover:scale-105 transition-scale duration-200 ease-in"
                         loading="lazy"
                         src={coverImage.imgUrl}
                         alt="cover"

@@ -100,12 +100,12 @@ export default function Listing() {
                             </p>
                         </div>
                         <div className="mt-3 mb-3">
-                            <span className="font-semibold">Description - </span>
+                            <span className="font-semibold">Description: </span>
                             {listing.description}
                         </div>
                         {listing.category !== "free" && (
                             <div className="text-semibold">
-                                <span className="font-semibold mt-3 mb-3">Price - </span>$
+                                <span className="font-semibold mt-3 mb-3">Price: </span>$
                                 {numToDelimited(listing.regPrice)}
                             </div>
                         )}
