@@ -12,6 +12,7 @@ import PrivateRouteLoggedIn from "./components/PrivateRouteLoggedIn";
 import Sell from "./pages/Sell";
 import EditListing from "./pages/EditListing";
 import AllItemByCategory from "./pages/AllItemByCategory";
+import Landing from "./pages/Landing";
 
 function App() {
     return (
@@ -19,7 +20,8 @@ function App() {
             <Router>
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/home" element={<Home />} />
                     <Route
                         path="/profile"
                         element={

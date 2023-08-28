@@ -1,0 +1,39 @@
+/* Feature section styles */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 80px;
+    background-color: #209cee;
+}
+
+.feature {
+    text-align: center;
+}
+
+.feature h3 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: white;
+}
+
+.feature p {
+    margin-top: 10px;
+    color: white;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        padding: 40px;
+    }
+
+    .hero-image {
+        margin-top: 20px;
+    }
+
+    .features {
+        flex-direction: column;
+        padding: 40px;
+    }
+}

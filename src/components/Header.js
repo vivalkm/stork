@@ -21,13 +21,13 @@ export default function Header() {
                         className="cursor-pointer ml-2 header-logo hidden md:inline-block"
                         src={logo}
                         alt="logo"
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/home")}
                     />
                     <img
                         className="cursor-pointer ml-2 header-logo hidden sm:inline-block md:hidden"
                         src={logo_sq}
                         alt="logo_sq"
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/home")}
                     />
                 </div>
                 <div className="ml-2 mr-2 w-[60%]">
@@ -37,11 +37,11 @@ export default function Header() {
                     <ul className="flex space-x-2 md:space-x-5 lg:space-x-10">
                         <li
                             className={`cursor-pointer py-3 text-sm font-semibold border-b-[3px] ${
-                                pathMatchRoute("/")
+                                pathMatchRoute("/home")
                                     ? "text-amber-200 border-amber-200"
                                     : "text-white border-b-transparent"
                             }`}
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/home")}
                         >
                             Home
                         </li>
