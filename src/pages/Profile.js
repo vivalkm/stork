@@ -39,7 +39,7 @@ export default function Profile() {
         auth.signOut();
         setLoggedIn(false);
         setIsOnEdit(false);
-        navigate("/");
+        navigate("/home");
     };
 
     const handleFormSubmit = async (event) => {

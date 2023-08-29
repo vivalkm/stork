@@ -39,7 +39,7 @@ export default function SignIn() {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             if (userCredential.user) {
                 // toast.success("Sign in successful!");
-                navigate("/");
+                navigate("/home");
             }
         } catch (error) {
             if (error instanceof FirebaseError) {
@@ -52,7 +52,7 @@ export default function SignIn() {
 
     const handleGoogleSignIn = async () => {
         if (await signInWithGoogle()) {
-            navigate("/");
+            navigate("/home");
         }
     };
 

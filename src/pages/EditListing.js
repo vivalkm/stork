@@ -59,7 +59,7 @@ export default function EditListing() {
     // check current user must be equal to user who created the listing
     if (!loading && formData.uid !== uid) {
         toast.error("You don't have permission to edit this listing.");
-        navigate("/");
+        navigate("/home");
     }
 
     // controlled input for the form data

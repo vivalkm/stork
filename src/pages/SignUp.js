@@ -52,7 +52,7 @@ export default function SignUp() {
             formDataNoPwd.timestamp = serverTimestamp();
             await setDoc(doc(db, "users", user.uid), formDataNoPwd);
             toast.success("Sign up successful!");
-            navigate("/");
+            navigate("/home");
         } catch (error) {
             console.log(error);
             // check empty
@@ -73,7 +73,7 @@ export default function SignUp() {
 
     const handleGoogleSignIn = async () => {
         if (await signInWithGoogle()) {
-            navigate("/");
+            navigate("/home");
         }
     };
 
