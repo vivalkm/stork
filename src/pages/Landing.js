@@ -9,7 +9,7 @@ export default function Landing() {
 
     return (
         <div>
-            <video src={bgVideo} autoPlay loop playsInline muted></video>
+            <video src={bgVideo} autoPlay loop playsInline muted type="video/mp4"></video>
             <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="header-text h-[60%] md:h-[70%]">
                     <h1>
