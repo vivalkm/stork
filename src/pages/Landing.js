@@ -13,8 +13,9 @@ export default function Landing() {
             <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="header-text h-[60%] md:h-[70%]">
                     <h1>
-                        Find the best deals in your neighborhood with Stork
-                        <span className="mt-2">Discover Hidden Treasures</span>
+                        <p className="mb-2">Discover Hidden Treasures</p>
+                        <p className="mb-4">Find the best deals in your neighborhood with</p>
+                        <span className="text-teal-300/80 my-2 font-extrabold">Stork</span>
                     </h1>
                     <div className="flex justify-center items-center">
                         <Button
