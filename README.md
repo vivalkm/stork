@@ -1,5 +1,8 @@
 # Stork
 Stork is a single-page serverless web application to support yard sale activities, making it easier than ever to buy and sell items in local community.
+
+<img width="500" alt="image" src="https://github.com/vivalkm/stork/assets/83200994/3348e6ab-73eb-433e-91a8-d8ef2c8bdf35">
+
 ## Deployment
 You can access Stork by visiting the following URL: https://stork-xi.vercel.app/
 ## Features
