@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Stork
+Stork is a single-page serverless web application to support yard sale activities, making it easier than ever to buy and sell items in local community.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img width="500" alt="image" src="https://github.com/vivalkm/stork/assets/83200994/3348e6ab-73eb-433e-91a8-d8ef2c8bdf35">
 
-## Available Scripts
+## Deployment
+You can access Stork by visiting the following URL: https://stork-xi.vercel.app/
+## Features
+Stork comes equipped with a wide range of features to enhance yard sale experience:
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Authentication
+- User Registration: Easily create an account using email or Google account, powered by Firebase Authentication.
+### Authorization
+- Secure Access: To post a listing, users must be logged in, ensuring a safe and trusted environment.
+- Listing Ownership: Users can edit only their own listings, maintaining control over their items.
+### Functionality
+- Categorized Listings: Discover items conveniently categorized as free or non-free, sorted by creation and editing dates in descending chronological order.
+- Category Exploration: Navigate through different categories to explore more listings in each specific category.
+- Detailed Listings: Each listing includes comprehensive details such as images, descriptions, prices, location, maps, and a convenient feature to contact the seller.
+- User Control: After creating a listing, users have the ability to edit and delete their listings as needed.
+- Profile Customization: Personalize profile by setting an avatar that will be displayed on each listing you create.
+- Communication: Connect with sellers easily for further discussions about the items you're interested in.
+- Efficient Search: Use keywords to search for specific items by title.
+- Responsive Design: Stork is fully responsive, ensuring a seamless experience on different screen sizes.
+- Captivating Landing: Experience the Stork platform with a captivating full-screen video landing page, setting the tone for an exciting yard sale adventure.
+  
+## Technology Stack
+### Front End
+- React: A dynamic and responsive front-end framework for building interactive web applications.
+- Tailwind CSS: A utility-first CSS framework that streamlines the design process, creating a polished and modern user interface.
+### Back End
+- Firebase Services: Firebase Authentication, Firestore, and Cloud Storage provide a secure and scalable backend for Stork.
+- AWS S3: Amazon S3 is utilized for efficient data storage and retrieval.
