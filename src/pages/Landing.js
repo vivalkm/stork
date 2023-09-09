@@ -15,7 +15,7 @@ export default function Landing() {
                     <h1>
                         <p className="mb-2">Discover Hidden Treasures</p>
                         <p className="mb-4">Find the best deals in your neighborhood with</p>
-                        <span className="text-teal-300/80 my-2 font-extrabold">Stork</span>
+                        <span className="title text-teal-300/80 my-2 font-extrabold">Stork</span>
                     </h1>
                     <div className="flex justify-center items-center">
                         <Button
@@ -30,7 +30,7 @@ export default function Landing() {
                     </div>
                 </div>
                 <div className="description h-[40%] md:h-[30%]">
-                    <section id="features" className="features sticky bottom-0">
+                    <section id="features" className="features">
                         <div className="feature">
                             <h3>Local Listings</h3>
                             <p>Discover yard sales happening near you and explore items for sale</p>
