@@ -30,7 +30,7 @@ export default function Landing() {
                     </div>
                 </div>
                 <div className="description h-[40%] md:h-[30%]">
-                    <section id="features" className="features">
+                    <section id="features" className="features sticky bottom-0">
                         <div className="feature">
                             <h3>Local Listings</h3>
                             <p>Discover yard sales happening near you and explore items for sale</p>

@@ -27,7 +27,7 @@ video {
 }
 .header-text span {
     display: block;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 2rem;
 }
 .description {
@@ -130,7 +130,7 @@ video {
         margin-bottom: 0.5rem;
     }
     .header-text span {
-        font-weight: 300;
+        font-weight: 400;
         font-size: 2rem;
     }
 }
