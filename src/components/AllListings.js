@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import ListingCard from "./ListingCard";
 import Button from "./Button";
 import { useParams } from "react-router";
+import Spinner from "./Spinner";
 
 export default function AllListings({ count, showMoreEnabled, category }) {
     const [loading, setLoading] = useState(true);
@@ -132,5 +133,7 @@ export default function AllListings({ count, showMoreEnabled, category }) {
         } else {
             return <div>There is no item to show.</div>;
         }
+    } else {
+        return <Spinner></Spinner>
     }
 }
