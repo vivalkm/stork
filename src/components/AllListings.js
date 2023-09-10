@@ -111,14 +111,18 @@ export default function AllListings({ count, showMoreEnabled, category }) {
     };
 
     const renderedListings = listings.map((listing) => {
-        return <ListingCard key={listing.id} listing={listing} editOn={false} />;
+        return (
+            <li className="m-2 sm:m-3 md:m-5">
+                <ListingCard key={listing.id} listing={listing} editOn={false} />
+            </li>
+        );
     });
 
     if (!loading) {
         if (renderedListings.length > 0) {
             return (
                 <div>
-                    <ul className="gap-2 grid py-6 px-6 sm:grid-cols-2 xl:grid-cols-4">
+                    <ul className="grid py-6 px-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                         {renderedListings}
                     </ul>
                     {showMoreEnabled && lastFetched && (

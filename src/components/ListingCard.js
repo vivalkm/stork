@@ -54,11 +54,11 @@ export default function ListingCard({ listing, editOn }) {
     }, [listing]);
 
     return (
-        <li className="relative bg-white border flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
+        <li className="group relative bg-white border flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
             <Link className="contents" to={`/listings/${listing.category}/${listing.id}`}>
-                <div className="h-full w-full pb-3 flex flex-col justify-center items-center bg-gray-100">
+                <div className="h-full w-full pb-3 flex flex-col justify-center items-center bg-gray-100 group-hover:bg-gray-300">
                     <img
-                        className="w-full mt-2 h-[170px] object-scale-down hover:scale-105 transition-scale duration-200 ease-in"
+                        className="w-3/5 mt-2 h-[170px] object-scale-down hover:scale-105 transition-scale duration-200 ease-in"
                         loading="lazy"
                         src={coverImage.imgUrl}
                         alt="cover"
@@ -70,7 +70,7 @@ export default function ListingCard({ listing, editOn }) {
                         {listing.timestamp?.toDate()}
                     </Moment>
                     <img
-                        className="absolute top-10 left-2 h-10 aspect-square rounded-full border-white border-4"
+                        className="absolute top-10 left-2 h-[4rem] aspect-square rounded-full border-white border-4"
                         src={avatarURL}
                         alt="avatar"
                     />

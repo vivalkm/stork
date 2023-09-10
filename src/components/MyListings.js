@@ -11,7 +11,11 @@ export default function MyListings() {
     }, [fetchListings]);
 
     const renderedListings = listings.map((listing, index) => {
-        return <ListingCard key={index} listing={listing} editOn={true} />;
+        return (
+            <li className="m-2">
+                <ListingCard key={index} listing={listing} editOn={true} />
+            </li>
+        );
     });
 
     if (!loading && renderedListings.length > 0) {
