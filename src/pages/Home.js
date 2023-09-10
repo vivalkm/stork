@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <div>
             <Header />
-            <div className="m-2 mb-6">
+            <div className="my-2 mb-6 md:w-2/3 mx-auto">
                 <div>
                     <MainTitle>All Recent Items</MainTitle>
                     <div className="text-center">

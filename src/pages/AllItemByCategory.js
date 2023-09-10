@@ -9,9 +9,11 @@ export default function AllItemByCategory() {
     return (
         <div>
             <Header />
-            <MainTitle>Items for {params.item ? params.item : params.category}</MainTitle>
-            <AllListings showMoreEnabled={true} />
-            <div className="mb-6"></div>
+            <div className="my-2 mb-6 w-2/3 mx-auto">
+                <MainTitle>Items for {params.item ? params.item : params.category}</MainTitle>
+                <AllListings showMoreEnabled={true} />
+                <div className="mb-6"></div>
+            </div>
         </div>
     );
 }
