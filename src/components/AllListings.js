@@ -13,7 +13,7 @@ export default function AllListings({ count, showMoreEnabled, category }) {
     const incrementalCount = 4;
     const params = useParams();
     const queryConstraints = [];
-    if (params.item) queryConstraints.push(where("name", "==", params.item));
+    // if (params.item) queryConstraints.push(where("name", "==", params.item));
     if (params.category && params.category !== "all") {
         queryConstraints.push(where("category", "==", params.category));
     } else if (category) {
@@ -33,9 +33,24 @@ export default function AllListings({ count, showMoreEnabled, category }) {
                 );
                 const querySnapshot = await getDocs(q);
                 const newListings = [];
-                querySnapshot.forEach((doc) => {
-                    newListings.push({ ...doc.data(), id: doc.id });
-                });
+
+
+                if (!params.item) {
+                    // get all doc
+                    querySnapshot.forEach((doc) => {
+                        newListings.push({ ...doc.data(), id: doc.id });
+                    });
+                } else {
+                    // get doc that name contains item as substring
+                    // enables fuzzy search
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.data().name);
+                        if (doc.data().name.includes(params.item)) {
+                            newListings.push({ ...doc.data(), id: doc.id });
+                        }
+                    });
+                }
+
                 if (isMounted) {
                     setListings(newListings);
                     setLoading(false);
@@ -66,9 +81,21 @@ export default function AllListings({ count, showMoreEnabled, category }) {
             );
             const querySnapshot = await getDocs(q);
             const newListings = [...listings];
-            querySnapshot.forEach((doc) => {
-                newListings.push({ ...doc.data(), id: doc.id });
-            });
+
+            if (!params.item) {
+                // get all doc
+                querySnapshot.forEach((doc) => {
+                    newListings.push({ ...doc.data(), id: doc.id });
+                });
+            } else {
+                // get doc that name contains item as substring
+                // enables fuzzy search
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().name.includes(params.item)) {
+                        newListings.push({ ...doc.data(), id: doc.id });
+                    }
+                });
+            }
 
             setListings(newListings);
             setLoading(false);
