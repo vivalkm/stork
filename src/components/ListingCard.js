@@ -70,7 +70,7 @@ export default function ListingCard({ listing, editOn }) {
                         {listing.timestamp?.toDate()}
                     </Moment>
                     <img
-                        className="absolute top-10 left-2 h-[4rem] aspect-square rounded-full border-white border-4"
+                        className="absolute top-10 left-2 h-[3.5rem] aspect-square rounded-full border-white border-4"
                         src={avatarURL}
                         alt="avatar"
                     />
