@@ -122,7 +122,7 @@ export default function AllListings({ count, showMoreEnabled, category }) {
         if (renderedListings.length > 0) {
             return (
                 <div>
-                    <ul className="grid py-6 px-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                    <ul className="m-auto grid py-6 px-6 sm:grid-cols-2 xl:w-[80%] 2xl:w-full 2xl:grid-cols-4">
                         {renderedListings}
                     </ul>
                     {showMoreEnabled && lastFetched && (
