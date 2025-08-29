@@ -9,7 +9,7 @@ const firebaseConfig = {
     authDomain: "stork-69d6e.firebaseapp.com",
     databaseURL: "https://stork-69d6e.firebaseio.com",
     projectId: "stork-69d6e",
-    storageBucket: "stork-69d6e.appspot.com",
+    storageBucket: "stork-69d6e.firebasestorage.app",
     messagingSenderId: "235218132633",
     appId: "1:235218132633:web:ff5562b4a60fb17059a208",
 };
